@@ -1,0 +1,37 @@
+{
+  "name": "flutter_mapbox_navigation",
+  "version": "0.2.2",
+  "summary": "Add Turn By Turn Navigation to Your Flutter Application Using MapBox. Never leave your app when you need to navigate your users to a location.",
+  "description": "Add Turn By Turn Navigation to Your Flutter Application Using MapBox. Never leave your app when you need to navigate your users to a location.",
+  "homepage": "https://eopeter.com",
+  "license": {
+    "file": "../LICENSE"
+  },
+  "authors": {
+    "Emmanuel Peter Oche": "eopeter@gmail.com"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*",
+  "dependencies": {
+    "Flutter": [
+
+    ],
+    "MapboxCoreNavigation": [
+      "~> 2.11"
+    ],
+    "MapboxNavigation": [
+      "~> 2.11"
+    ]
+  },
+  "platforms": {
+    "ios": "12.0"
+  },
+  "pod_target_xcconfig": {
+    "DEFINES_MODULE": "YES",
+    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "i386"
+  },
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
+}

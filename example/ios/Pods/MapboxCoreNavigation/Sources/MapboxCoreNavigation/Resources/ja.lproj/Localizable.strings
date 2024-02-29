@@ -1,0 +1,3 @@
+/* Inform developer an update is available */
+"UPDATE_AVAILABLE" = "iOS %@用 Mapbox Navigation SDKが使用できます";
+

@@ -1,0 +1,6 @@
+framework module flutter_mapbox_navigation {
+  umbrella header "flutter_mapbox_navigation-umbrella.h"
+
+  export *
+  module * { export * }
+}

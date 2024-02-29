@@ -29,7 +29,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MBXAccessToken</key>
-	<string>sk.eyJ1IjoiZnJhbnowOTciLCJhIjoiY2xzd3kzM3NuMnBuZjJocHMwMmZnamdrZCJ9.fmjP1TsC89zQYBzlpq4xiA</string>
+	<string>sk.eyJ1IjoiZnJhbnowOTciLCJhIjoiY2xzd3kzM3NuMnBuZjJocHMwMmZnamdrZCJ9.fmjP1TsC89zQYBzlpq4xiA.fmjP1TsC89zQYBzlpq4xiA</string>
 	<key>MGLMapboxMetricsEnabledSettingShownInApp</key>
 	<string>YES</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
