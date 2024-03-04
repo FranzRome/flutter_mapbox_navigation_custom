@@ -6,8 +6,9 @@
 @_implementationOnly import MapboxCoreMaps_Private
 @_implementationOnly import MapboxCommon_Private
 import UIKit
+import os
 
-// swiftlint:disable type_body_length
+// swiftlint:disable:next type_body_length
 open class MapView: UIView {
 
     // `mapboxMap` depends on `MapInitOptions`, which is not available until
@@ -66,6 +67,13 @@ open class MapView: UIView {
         }
         set {
             metalView?.presentsWithTransaction = newValue
+        }
+    }
+
+    open override var isOpaque: Bool {
+        didSet {
+            metalView?.isOpaque = isOpaque
+            metalView?.layer.isOpaque = isOpaque
         }
     }
 
@@ -183,6 +191,8 @@ open class MapView: UIView {
     ///    `ResourceOptionsManager.default` to retrieve a shared default resource option, including the access token.
     @available(iOSApplicationExtension, unavailable)
     public init(frame: CGRect, mapInitOptions: MapInitOptions = MapInitOptions()) {
+        let trace = OSLog.platform.beginInterval("MapView.init")
+        defer { trace.end() }
         let orientationProvider: InterfaceOrientationProvider
         if #available(iOS 13, *) {
             orientationProvider = DefaultInterfaceOrientationProvider()
@@ -214,6 +224,8 @@ open class MapView: UIView {
                 mapInitOptions: MapInitOptions = MapInitOptions(),
                 orientationProvider: InterfaceOrientationProvider,
                 urlOpener: AttributionURLOpener) {
+        let trace = OSLog.platform.beginInterval("MapView.init")
+        defer { trace.end() }
         dependencyProvider = MapViewDependencyProvider(interfaceOrientationProvider: orientationProvider)
         attributionUrlOpener = urlOpener
         self.applicationStateProvider = nil
@@ -236,6 +248,8 @@ open class MapView: UIView {
     public init(frame: CGRect,
                 mapInitOptions: MapInitOptions = MapInitOptions(),
                 urlOpener: AttributionURLOpener) {
+        let trace = OSLog.platform.beginInterval("MapView.init")
+        defer { trace.end() }
         dependencyProvider = MapViewDependencyProvider(
             interfaceOrientationProvider: DefaultInterfaceOrientationProvider()
         )
@@ -252,6 +266,8 @@ open class MapView: UIView {
 
     @available(iOSApplicationExtension, unavailable)
     required public init?(coder: NSCoder) {
+        let trace = OSLog.platform.beginInterval("MapView.init")
+        defer { trace.end() }
         let orientationProvider: InterfaceOrientationProvider
         if #available(iOS 13, *) {
             orientationProvider = DefaultInterfaceOrientationProvider()
@@ -275,6 +291,8 @@ open class MapView: UIView {
                   dependencyProvider: MapViewDependencyProviderProtocol,
                   urlOpener: AttributionURLOpener,
                   applicationStateProvider: Provider<UIApplication.State>?) {
+        let trace = OSLog.platform.beginInterval("MapView.init")
+        defer { trace.end() }
         self.dependencyProvider = dependencyProvider
         attributionUrlOpener = urlOpener
         self.applicationStateProvider = applicationStateProvider
@@ -294,6 +312,7 @@ open class MapView: UIView {
         fatalError("This initializer should not be called.")
     }
 
+    // swiftlint:disable:next function_body_length
     private func commonInit(mapInitOptions: MapInitOptions, overridingStyleURI: URL?) {
         checkForMetalSupport()
 
@@ -379,6 +398,7 @@ open class MapView: UIView {
         eventsManager.sendMapLoadEvent(with: traitCollection)
     }
 
+    // swiftlint:disable:next function_body_length
     internal func setupManagers() {
         // Initialize/Configure camera manager first since Gestures needs it as dependency
         cameraAnimatorsRunner = dependencyProvider.makeCameraAnimatorsRunner(
@@ -505,21 +525,21 @@ open class MapView: UIView {
 
     @available(iOS 13.0, *)
     @objc private func sceneDidActivate(_ notification: Notification) {
-        guard notification.object as? UIScene == window?.parentScene else { return }
+        guard let scene = notification.object as? UIScene, let window = window, scene.allWindows.contains(window) else { return }
 
         displayLink?.isPaused = false
     }
 
     @available(iOS 13, *)
     @objc private func sceneWillDeactivate(_ notification: Notification) {
-        guard notification.object as? UIScene == window?.parentScene else { return }
+        guard let scene = notification.object as? UIScene, let window = window, scene.allWindows.contains(window) else { return }
 
         displayLink?.isPaused = true
     }
 
     @available(iOS 13, *)
     @objc private func sceneDidEnterBackground(_ notification: Notification) {
-        guard notification.object as? UIScene == window?.parentScene else { return }
+        guard let scene = notification.object as? UIScene, let window = window, scene.allWindows.contains(window) else { return }
 
         displayLink?.isPaused = true
         reduceMemoryUse()
@@ -574,13 +594,23 @@ open class MapView: UIView {
 
     open override func layoutSubviews() {
         super.layoutSubviews()
-        mapboxMap.size = bounds.size
+
+        // metal view is created by invoking `MapboxMap.createRenderer()`
+        // which is currently invoked in the init of the `MapboxMap`
+        // making metal view always available here
+        if let metalView = metalView {
+            mapboxMap.size = metalView.bounds.size
+        }
     }
 
     @_spi(Metrics) public var metricsReporter: MapViewMetricsReporter?
     private func updateFromDisplayLink(displayLink: CADisplayLink) {
+        let trace = OSLog.platform.beginInterval("MapView.displayLink")
+        defer { trace.end() }
+
         metricsReporter?.beforeDisplayLinkCallback(displayLink: displayLink)
         defer { metricsReporter?.afterDisplayLinkCallback(displayLink: displayLink) }
+
         if window == nil {
             return
         }
@@ -588,11 +618,15 @@ open class MapView: UIView {
         for participant in displayLinkParticipants.allObjects {
             participant.participate()
         }
+        trace.event(message: "Participants")
 
         cameraAnimatorsRunner.update()
+        trace.event(message: "Camera animations")
 
         if needsDisplayRefresh {
             needsDisplayRefresh = false
+            let trace = OSLog.platform.beginInterval("MetalView.draw")
+            defer { trace.end() }
             metricsReporter?.beforeMetalViewDrawCallback(metalView: metalView)
             metalView?.draw()
             metricsReporter?.afterMetalViewDrawCallback(metalView: metalView)

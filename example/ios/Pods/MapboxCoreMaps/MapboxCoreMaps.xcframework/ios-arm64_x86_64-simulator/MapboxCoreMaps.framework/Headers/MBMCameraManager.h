@@ -10,12 +10,15 @@
 @class MBMCameraBoundsOptions;
 @class MBMCameraOptions;
 @class MBMCameraState;
+@class MBMCanonicalTileID;
 @class MBMCoordinateBounds;
 @class MBMCoordinateBoundsZoom;
+@class MBMCoordinateInfo;
 @class MBMEdgeInsets;
 @class MBMFreeCameraOptions;
 @class MBMScreenBox;
 @class MBMScreenCoordinate;
+@class MBMTileCoverOptions;
 
 /** Interface for managing camera. */
 NS_SWIFT_NAME(CameraManager)
@@ -158,6 +161,20 @@ __attribute__((visibility ("default")))
  */
 - (CLLocationCoordinate2D)coordinateForPixelForPixel:(nonnull MBMScreenCoordinate *)pixel;
 /**
+ * Calculates the geographical coordinate information that corresponds to a given screen coordinate.
+ *
+ * The screen coordinate is in platform pixels, relative to the top left corner of the map (not the whole screen).
+ *
+ * The returned coordinate will be the closest position projected onto the map surface,
+ * in case the screen coordinate does not intersect with the map surface.
+ *
+ * @param pixel The screen coordinate on the map, in platform pixels.
+ *
+ * @return A CoordinateInfo record containing information about the geographical coordinate corresponding to the given screen coordinate, including whether it is on the map surface.
+ *
+ */
+- (nonnull MBMCoordinateInfo *)coordinateInfoForPixelForPixel:(nonnull MBMScreenCoordinate *)pixel __attribute((ns_returns_retained));
+/**
  * Calculates `screen coordinates` that correspond to geographical `coordinates`
  * (i.e., longitude-latitude pairs).
  *
@@ -181,6 +198,20 @@ __attribute__((visibility ("default")))
  * @return A `geographical coordinates` that correspond to a given `screen coordinates`.
  */
 - (nonnull NSArray<CLLocation *> *)coordinatesForPixelsForPixels:(nonnull NSArray<MBMScreenCoordinate *> *)pixels __attribute((ns_returns_retained));
+/**
+ * Calculates the geographical coordinates information that corresponds to the given screen coordinates.
+ *
+ * The screen coordinates are in platform pixels, relative to the top left corner of the map (not the whole screen).
+ *
+ * The returned coordinate will be the closest position projected onto the map surface,
+ * in case the screen coordinate does not intersect with the map surface.
+ *
+ * @param pixels The screen coordinate on the map, in platform pixels.
+ *
+ * @return The CoordinateInfo records containing information about the geographical coordinates corresponding to the given screen coordinates, including whether they are on the map surface.
+ *
+ */
+- (nonnull NSArray<MBMCoordinateInfo *> *)coordinatesInfoForPixelsForPixels:(nonnull NSArray<MBMScreenCoordinate *> *)pixels __attribute((ns_returns_retained));
 /**
  * Changes the map view by any combination of center, zoom, bearing, and pitch, without an animated transition.
  * The map will retain its current values for any details not passed via the camera options argument.

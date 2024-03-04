@@ -10,6 +10,6 @@ NS_SWIFT_NAME(ReachabilityInterface)
 - (BOOL)removeListenerForId:(uint64_t)id;
 - (BOOL)isReachable;
 - (MBXNetworkStatus)currentNetworkStatus;
-- (void)start;
-- (void)stop;
+- (void)start __attribute__((deprecated("no-op (the monitoring is now controlled based on active listeners)")));
+- (void)stop __attribute__((deprecated("no-op (the monitoring is now controlled based on active listeners)")));
 @end

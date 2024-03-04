@@ -42,7 +42,7 @@ __attribute__((visibility ("default")))
  *
  * @return `true` if the snapshotter is in the tile mode, `false` otherwise.
  */
-- (BOOL)isInTileMode;
+- (BOOL)isInTileMode __attribute__((deprecated));
 /**
  * Sets the snapshotter to the tile mode.
  *
@@ -50,7 +50,7 @@ __attribute__((visibility ("default")))
  *
  * @param set A `boolean` value representing if the snapshotter is in the tile mode.
  */
-- (void)setTileModeForSet:(BOOL)set;
+- (void)setTileModeForSet:(BOOL)set __attribute__((deprecated));
 /**
  * Cancel the current snapshot operation.
  *

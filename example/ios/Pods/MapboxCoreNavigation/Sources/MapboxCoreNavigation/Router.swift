@@ -62,15 +62,14 @@ public struct IndexedRouteResponse {
         
         let encoder = JSONEncoder()
         encoder.userInfo[.options] = routeOptions
-        guard let routeData = try? encoder.encode(routeResponse),
-              let routeJSONString = String(data: routeData, encoding: .utf8) else {
+        guard let routeData = try? encoder.encode(routeResponse) else {
                   return nil
         }
         
         let routeRequest = Directions(credentials: routeResponse.credentials)
             .url(forCalculating: routeOptions).absoluteString
         
-        let parsedRoutes = routeParserType.parseDirectionsResponse(forResponse: routeJSONString,
+        let parsedRoutes = routeParserType.parseDirectionsResponse(forResponseDataRef: .init(data: routeData),
                                                                    request: routeRequest,
                                                                    routeOrigin: responseOrigin)
         if parsedRoutes.isValue(),
@@ -318,6 +317,7 @@ protocol InternalRouter: AnyObject {
     func updateRoute(with indexedRouteResponse: IndexedRouteResponse,
                      routeOptions: RouteOptions?,
                      isProactive: Bool,
+                     isAlternative: Bool,
                      completion: ((Bool) -> Void)?)
 }
 
@@ -458,7 +458,8 @@ extension InternalRouter where Self: Router {
                     // Prefer the most optimal route (the first one) over the route that matched the original choice.
                     self.updateRoute(with: indexedResponse,
                                      routeOptions: routeOptions ?? self.routeProgress.routeOptions,
-                                     isProactive: true) { [weak self] success in
+                                     isProactive: true,
+                                     isAlternative: false) { [weak self] success in
                         self?.isRerouting = false
                     }
                 }

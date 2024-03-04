@@ -210,7 +210,7 @@
 		</data>
 		<key>Headers/MBXTileRegionLoadOptions.h</key>
 		<data>
-		iHNWddr2waVY4ASW0AsPyW7Jmgo=
+		Kns2jxyjXiJw4pnMqH9zMzLe3U0=
 		</data>
 		<key>Headers/MBXTileRegionLoadProgress.h</key>
 		<data>
@@ -278,7 +278,7 @@
 		</data>
 		<key>Headers/MapboxCommon-Swift.h</key>
 		<data>
-		BnMrdrGym4VE4OfmT/Y9VyTpKDY=
+		if4tkhS5bQwQe1VOgkmGm1OsXdE=
 		</data>
 		<key>Headers/MapboxCommon.h</key>
 		<data>
@@ -322,63 +322,75 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		/dToHsIDTK0zhEiPtCLVV8TI2x0=
+		nn79uBkdMSxuUBE9BRlFFUpL+ME=
+		</data>
+		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
+		<data>
+		5jQJYXWyPXX2UqW5EoSQHerJd38=
+		</data>
+		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
+		<data>
+		jXbLSMvGsqr7ftdtBma3QLnO3po=
 		</data>
 		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		vbGR/O+9nWygrQJA+/R6NWqtqcE=
+		jArPW8QfsBUgV97AT7Gzzal/xjw=
 		</data>
 		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		3quwdEgHOX1TwItEG8K2OhV7SXE=
+		jXbLSMvGsqr7ftdtBma3QLnO3po=
 		</data>
 		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		DnyJnAwsVxZeFCQXm5AEm1m9pX0=
+		8eh3z/iYtng4wTwk8xeUJG52eOc=
 		</data>
-		<key>Modules/MapboxCommon.swiftmodule/arm64.swiftdoc</key>
+		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		vbGR/O+9nWygrQJA+/R6NWqtqcE=
+		5jQJYXWyPXX2UqW5EoSQHerJd38=
 		</data>
-		<key>Modules/MapboxCommon.swiftmodule/arm64.swiftinterface</key>
+		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		3quwdEgHOX1TwItEG8K2OhV7SXE=
-		</data>
-		<key>Modules/MapboxCommon.swiftmodule/arm64.swiftmodule</key>
-		<data>
-		DnyJnAwsVxZeFCQXm5AEm1m9pX0=
+		M02znSrpetN5ICcNB5+cnudRuJk=
 		</data>
 		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		+bADbUQJiJShAP/VLipFIgtQk2Y=
+		TsGUG2CdOnqjjK4+JZVCwIIF5hQ=
 		</data>
 		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		wLYSZZGVHqDcUXh8Gqkoxa5hv+g=
+		M02znSrpetN5ICcNB5+cnudRuJk=
 		</data>
 		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		R/wflJJ5Ig3Ma1m7xu/w5LqaGmY=
-		</data>
-		<key>Modules/MapboxCommon.swiftmodule/x86_64.swiftdoc</key>
-		<data>
-		+bADbUQJiJShAP/VLipFIgtQk2Y=
-		</data>
-		<key>Modules/MapboxCommon.swiftmodule/x86_64.swiftinterface</key>
-		<data>
-		wLYSZZGVHqDcUXh8Gqkoxa5hv+g=
-		</data>
-		<key>Modules/MapboxCommon.swiftmodule/x86_64.swiftmodule</key>
-		<data>
-		R/wflJJ5Ig3Ma1m7xu/w5LqaGmY=
+		EP2rsNZ4/bBK1MtxHDuWBMLOySE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		cnIMkSID1E2zl4G8pmloHRkwSKI=
+		gWTFAcwRS6mO8c3RppqjplAsZUs=
 		</data>
 		<key>Modules/module.private.modulemap</key>
 		<data>
 		1WDuhgfiuvBZUPQdwtWrNSmIJ6o=
+		</data>
+		<key>PrivacyInfo.xcprivacy</key>
+		<data>
+		b2f91Hy40ZrF9zJ7lu7O1lfXRlE=
+		</data>
+		<key>PrivateHeaders/MBXBatteryChargingStatusCallback_Internal.h</key>
+		<data>
+		HdvzYLFGRawt1w2dEwt1uDY7k3M=
+		</data>
+		<key>PrivateHeaders/MBXBatteryMonitorFactory_Internal.h</key>
+		<data>
+		WcgKgcWQYVR29o27avQiRoBnex8=
+		</data>
+		<key>PrivateHeaders/MBXBatteryMonitorInterface_Internal.h</key>
+		<data>
+		gAhEVOgZLcCDk32toFFXH/hfpxk=
+		</data>
+		<key>PrivateHeaders/MBXBatteryMonitorObserver_Internal.h</key>
+		<data>
+		0AK9okNAwxV9hGdWjSmJjgLKwDY=
 		</data>
 		<key>PrivateHeaders/MBXBillingServiceErrorCode_Internal.h</key>
 		<data>
@@ -394,7 +406,7 @@
 		</data>
 		<key>PrivateHeaders/MBXBillingServiceInterface_Internal.h</key>
 		<data>
-		4ZeMfVwjHCa2TWI1A2hVqxOVNUo=
+		09aqNtJZFACGCsYr57EwFQQygcc=
 		</data>
 		<key>PrivateHeaders/MBXBillingSessionStatus_Internal.h</key>
 		<data>
@@ -488,6 +500,10 @@
 		<data>
 		Qmp+crv2IjIBwLiDMDNWiKQ3jsI=
 		</data>
+		<key>PrivateHeaders/MBXFeatureTelemetryCountersV2_Internal.h</key>
+		<data>
+		45sjx/Do0NTA0TDvIKZA41ScvYM=
+		</data>
 		<key>PrivateHeaders/MBXFlushOperationResultCallback_Internal.h</key>
 		<data>
 		wmgbcSdzB5pE0V89oHXkndbggGU=
@@ -506,7 +522,7 @@
 		</data>
 		<key>PrivateHeaders/MBXHttpCertificatePinsProvider_Internal.h</key>
 		<data>
-		qxe9wnW0xMkOFqqczoBiVFSw5l8=
+		J6qC+2Ih4A5F+vcjJRWfY1DeQKw=
 		</data>
 		<key>PrivateHeaders/MBXHttpResponse_Internal.h</key>
 		<data>
@@ -552,6 +568,38 @@
 		<data>
 		3CafNT1H8g5Xuky+UNP4JYWnomw=
 		</data>
+		<key>PrivateHeaders/MBXMaploadSKUIdentifier_Internal.h</key>
+		<data>
+		4hXTud0qDhwg//I7sTOWckLAiqw=
+		</data>
+		<key>PrivateHeaders/MBXMovementInfoCallback_Internal.h</key>
+		<data>
+		Uds1rUkg4jOjjpLxhs3DLzZLvoU=
+		</data>
+		<key>PrivateHeaders/MBXMovementInfo_Internal.h</key>
+		<data>
+		/XKdhqA6caewUwfEMRPNtLOpcHU=
+		</data>
+		<key>PrivateHeaders/MBXMovementModeObserver_Internal.h</key>
+		<data>
+		4F/JZVsWopuWku+vYlH9FZO1hjY=
+		</data>
+		<key>PrivateHeaders/MBXMovementModeProvider_Internal.h</key>
+		<data>
+		wgEvAA/xaBT25IqRC42y9Q+Wu0g=
+		</data>
+		<key>PrivateHeaders/MBXMovementMode_Internal.h</key>
+		<data>
+		uy6TXPDPd6maMUY25QTAhTDkm7M=
+		</data>
+		<key>PrivateHeaders/MBXMovementMonitorFactory_Internal.h</key>
+		<data>
+		GVmYJdXdwHpYUIpIi72wIK1k+pw=
+		</data>
+		<key>PrivateHeaders/MBXMovementMonitorInterface_Internal.h</key>
+		<data>
+		UU61/iEwdoorvmGrdX+RdQKJGGM=
+		</data>
 		<key>PrivateHeaders/MBXNetworkStatus_Internal.h</key>
 		<data>
 		4RbTbx6ABARoDGGKiBPat3Q6OYc=
@@ -590,7 +638,7 @@
 		</data>
 		<key>PrivateHeaders/MBXReachabilityInterface_Internal.h</key>
 		<data>
-		CGCCMXfGbEyEwBPO6FxrJzlgqrQ=
+		LMDQhyc7JFX/1svPWbKC30q3E4g=
 		</data>
 		<key>PrivateHeaders/MBXResourceData_Internal.h</key>
 		<data>
@@ -610,7 +658,7 @@
 		</data>
 		<key>PrivateHeaders/MBXResourceLoadFlags_Internal.h</key>
 		<data>
-		pctUp51hspCLgjnys8W0Szwvq+Q=
+		+SB8w/jSYAl5YMOvbZBPQZm9Gyc=
 		</data>
 		<key>PrivateHeaders/MBXResourceLoadOptions_Internal.h</key>
 		<data>
@@ -636,6 +684,18 @@
 		<data>
 		CPXPXpcxwLEJf9fd3US/82my2XQ=
 		</data>
+		<key>PrivateHeaders/MBXSdkInfoRegistryFactory_Internal.h</key>
+		<data>
+		+kEYkRazsMHfqrFWGyY4Q7wFEgE=
+		</data>
+		<key>PrivateHeaders/MBXSdkInfoRegistryInterface_Internal.h</key>
+		<data>
+		3zHbF4FU35D4Oc3L1DYZ3RhNmTU=
+		</data>
+		<key>PrivateHeaders/MBXSdkInformation_Internal.h</key>
+		<data>
+		XyPOjFN1sYjU+d/gf3vTFNLsh1g=
+		</data>
 		<key>PrivateHeaders/MBXSessionSKUIdentifier_Internal.h</key>
 		<data>
 		Wdm8Ij+u3kh5ys5oQqb4IqmfA64=
@@ -656,6 +716,14 @@
 		<data>
 		WJK88Ex5XU4LwAYar1K3ghR7NsM=
 		</data>
+		<key>PrivateHeaders/MBXTelemetryCollectionStateObserver_Internal.h</key>
+		<data>
+		4Pb603hszlOl/WiEj8fc5AoxGEY=
+		</data>
+		<key>PrivateHeaders/MBXTelemetryCollectionState_Internal.h</key>
+		<data>
+		IslrXRYXLQ7SyLkjwyLxdrsYYuM=
+		</data>
 		<key>PrivateHeaders/MBXTelemetryService_Internal.h</key>
 		<data>
 		A75scbSC3ClLRES254d4P5Btexo=
@@ -666,7 +734,7 @@
 		</data>
 		<key>PrivateHeaders/MBXTelemetryUtils_Internal.h</key>
 		<data>
-		sz1GGgvUcZaforSBHX0AScbRPVc=
+		YYFH86Pa0gHJ8ibwzm0Dy+xpTQU=
 		</data>
 		<key>PrivateHeaders/MBXTileRegionBooleanCallback_Internal.h</key>
 		<data>
@@ -722,7 +790,11 @@
 		</data>
 		<key>PrivateHeaders/MapboxAccounts_Internal.h</key>
 		<data>
-		6lgEwMYnpa/aveq8N4/EE97Dubo=
+		3iLioa+uNzUtT2KNHD31UyjlfrY=
+		</data>
+		<key>PrivateHeaders/MapboxBattery_Internal.h</key>
+		<data>
+		eWqRQ6TBYJwakp1ubsmdJjNB2Iw=
 		</data>
 		<key>PrivateHeaders/MapboxBillingService_Internal.h</key>
 		<data>
@@ -734,7 +806,7 @@
 		</data>
 		<key>PrivateHeaders/MapboxCommon_Internal.h</key>
 		<data>
-		n/K4wSuhl3rordE7J7kdoYDeRVY=
+		Ph8kdOeX8PdcTMJfceEY/WOu4eU=
 		</data>
 		<key>PrivateHeaders/MapboxConfigurationService_Internal.h</key>
 		<data>
@@ -751,6 +823,10 @@
 		<key>PrivateHeaders/MapboxEventsService_Internal.h</key>
 		<data>
 		Xmv7v6CCqa0zlpuWXQnNq11a1VM=
+		</data>
+		<key>PrivateHeaders/MapboxFeatureTelemetry_Internal.h</key>
+		<data>
+		mVnUj3+n+QMD3ls25FoJi3FNjQc=
 		</data>
 		<key>PrivateHeaders/MapboxHttp_Internal.h</key>
 		<data>
@@ -772,6 +848,10 @@
 		<data>
 		H34RqSjV0SNDzASz74RpMgCOaFQ=
 		</data>
+		<key>PrivateHeaders/MapboxMovement_Internal.h</key>
+		<data>
+		P+xChFYlermO/0Aok7xO8EYe93s=
+		</data>
 		<key>PrivateHeaders/MapboxOfflineSwitch_Internal.h</key>
 		<data>
 		zPah7B+Q3F+4X56WR5CL4TWAL2I=
@@ -779,6 +859,10 @@
 		<key>PrivateHeaders/MapboxReachability_Internal.h</key>
 		<data>
 		p1Pweeg8LapjVM+dPFnDvZFVrLc=
+		</data>
+		<key>PrivateHeaders/MapboxSdkInfoRegistry_Internal.h</key>
+		<data>
+		mmAXUrrm6yhH1heZNO+HPQQedbc=
 		</data>
 		<key>PrivateHeaders/MapboxSettingsService_Internal.h</key>
 		<data>
@@ -790,7 +874,7 @@
 		</data>
 		<key>PrivateHeaders/MapboxTelemetryUtils_Internal.h</key>
 		<data>
-		7UZlSBvSbGNDQR+uNlAizi+PW9M=
+		9zhgUzVqdwcw/0Ce1sUY2QxOakk=
 		</data>
 		<key>PrivateHeaders/MapboxTelemetry_Internal.h</key>
 		<data>
@@ -1180,7 +1264,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			o7KhnWZua5XjM3Jq82ObR+GSEFEuTD34jn6ZRqMjjlg=
+			OKwzqFECH/i30aVFigRV8rcpaWCFZ7+OSudgyW7DCuY=
 			</data>
 		</dict>
 		<key>Headers/MBXTileRegionLoadProgress.h</key>
@@ -1299,7 +1383,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			CHL7RxMDQ0YcR0ecRCqs4R7v5SLqEL3lC25fX28ZNx8=
+			ng/m5rvdK/ItKuJC7A2tO4jeyLlLdhFvkwLEg7tqJr8=
 			</data>
 		</dict>
 		<key>Headers/MapboxCommon.h</key>
@@ -1372,95 +1456,81 @@
 			ybFp871o0qznEXs+51rPTRx2G0AaHh7DSYsbj2g78sc=
 			</data>
 		</dict>
+		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RdsQwj6GejM7KDd+u/RjmEFciDp3bsImNHHFewtRU8w=
+			</data>
+		</dict>
+		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			5tNQIsMK5jOADzkk+2RHpEq7rIJdKG8Yerak8s6SRRE=
+			</data>
+		</dict>
 		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PReESUc19LUEGPR5xjlQUIjQfh2prnBR+5DJ2qDhnpA=
+			jznfN5JTRm2UMoGhbm6+XLuoyLVPZWm6gmuUmPwCmSw=
 			</data>
 		</dict>
 		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9U7BnhS6tvrTswvLyK2GOB88jxopaVeuDzBo5b62qcQ=
+			5tNQIsMK5jOADzkk+2RHpEq7rIJdKG8Yerak8s6SRRE=
 			</data>
 		</dict>
 		<key>Modules/MapboxCommon.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Qn+EwMAgTzCIKYk5lyYj4EbXNpUaGL6ewhyYf9CT5Cw=
+			e8dmogI94ng/z0MqKINECUIR+A7gxqMbfgQxFM+fLSY=
 			</data>
 		</dict>
-		<key>Modules/MapboxCommon.swiftmodule/arm64.swiftdoc</key>
+		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PReESUc19LUEGPR5xjlQUIjQfh2prnBR+5DJ2qDhnpA=
+			RdsQwj6GejM7KDd+u/RjmEFciDp3bsImNHHFewtRU8w=
 			</data>
 		</dict>
-		<key>Modules/MapboxCommon.swiftmodule/arm64.swiftinterface</key>
+		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9U7BnhS6tvrTswvLyK2GOB88jxopaVeuDzBo5b62qcQ=
-			</data>
-		</dict>
-		<key>Modules/MapboxCommon.swiftmodule/arm64.swiftmodule</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Qn+EwMAgTzCIKYk5lyYj4EbXNpUaGL6ewhyYf9CT5Cw=
+			ymgaTSsI8F2N6fnvuMF27KPFKQdrAO1tx82kmLDarys=
 			</data>
 		</dict>
 		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jYmlcvPard0jEBcU4oSgLExlyzl3thGYgvgBd0IeZ8k=
+			6xPG5YxlT3ntmUWJ7j0i0gLtQf7zTt82XtgaPTpMOUE=
 			</data>
 		</dict>
 		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SwDMLQg94ua+KSTbAJyxeQAXrbkTvGhrKOwXlJb1VSY=
+			ymgaTSsI8F2N6fnvuMF27KPFKQdrAO1tx82kmLDarys=
 			</data>
 		</dict>
 		<key>Modules/MapboxCommon.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bPeIByzr1CucNHEL3pD6B5O8kXv7aBi2y4uqf5iyQe8=
-			</data>
-		</dict>
-		<key>Modules/MapboxCommon.swiftmodule/x86_64.swiftdoc</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			jYmlcvPard0jEBcU4oSgLExlyzl3thGYgvgBd0IeZ8k=
-			</data>
-		</dict>
-		<key>Modules/MapboxCommon.swiftmodule/x86_64.swiftinterface</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			SwDMLQg94ua+KSTbAJyxeQAXrbkTvGhrKOwXlJb1VSY=
-			</data>
-		</dict>
-		<key>Modules/MapboxCommon.swiftmodule/x86_64.swiftmodule</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bPeIByzr1CucNHEL3pD6B5O8kXv7aBi2y4uqf5iyQe8=
+			63TVc2XwNld7LZXMN6dRlqRLnCycEILavRXVB33O8js=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			O52scEFLQxXWEAh9hWqr/X3pvmoWTl86edpKEdgGGwM=
+			kt7ngkF83CaWXyN8nYmV88n3LnzRuXH3zw27aeK8EKc=
 			</data>
 		</dict>
 		<key>Modules/module.private.modulemap</key>
@@ -1468,6 +1538,41 @@
 			<key>hash2</key>
 			<data>
 			TFYbr7poSqMk92fMVcu/h4pgnd2jox0bbbB3ilwEtsI=
+			</data>
+		</dict>
+		<key>PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ZVIy53+MSHrDkFIJ5vPToufDmZDYFm8IbMbR0qJZQ7E=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXBatteryChargingStatusCallback_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			jdB5ajDoP/hrLj/kJn2aGEY79VMZGwq69V7k2qr2XJg=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXBatteryMonitorFactory_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			itkLJn3Svx7k9ihXV2+H+M8fia5hBPw4TNSHnGUoI1Y=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXBatteryMonitorInterface_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BMM09Cyf7ovXhNUP1XG27NniwzJnINWNfUFY5TVeyOU=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXBatteryMonitorObserver_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/BbHEalM4kulG6K8o+OOCpwsuBx8vPXvTRsNN9d1HwA=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MBXBillingServiceErrorCode_Internal.h</key>
@@ -1495,7 +1600,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2XhQMIcpFy5csDiTWT4czyP4pfAUgC/1nkZ4IvEp4do=
+			8wPIzgzi8CFHVM8qfacuTPEz/wdR+z5R0fXWiyFMZUY=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MBXBillingSessionStatus_Internal.h</key>
@@ -1659,6 +1764,13 @@
 			GX26+Tz6HDx9daw4guoGkJArHWwdalb9hdnbTeurpl0=
 			</data>
 		</dict>
+		<key>PrivateHeaders/MBXFeatureTelemetryCountersV2_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iPErRQD+eFu2HTl4B097XsMO1S6fMdPEhIn+gzjMStQ=
+			</data>
+		</dict>
 		<key>PrivateHeaders/MBXFlushOperationResultCallback_Internal.h</key>
 		<dict>
 			<key>hash2</key>
@@ -1691,7 +1803,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			L2lkOPKYgrUR6izEIIH6R1zhIZk+tva4OWZfQ4e1T5w=
+			Pz8eVMvsr4ZRA98MTemfFup64CLG7HHPr5pDhon0LHo=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MBXHttpResponse_Internal.h</key>
@@ -1771,6 +1883,62 @@
 			6FEKLsgBv7mul0ONajWL00GkMILgIJccJ45pocBODl4=
 			</data>
 		</dict>
+		<key>PrivateHeaders/MBXMaploadSKUIdentifier_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			M7zCD7DwWUOYjmVccq3DWOC7BhyHAFVRavxc/8qjjH0=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXMovementInfoCallback_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dfuVb55AqyO1ff8drKScQh2vKDlpJq/Mq6tpGd429ms=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXMovementInfo_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			FgdrJt9JHRkpwGscR7FQnf2744i2S0ePx9E9Nr1gJK8=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXMovementModeObserver_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			63DtlLqdpsbR3RpsZ93e+D9wxtOt2crrVXbtqN4G2+Y=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXMovementModeProvider_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			LIbn4udOS/EQU2Muhvry0VDOFZLkxmplScxByXKSEUg=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXMovementMode_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ZnRAOY8Dqk2YA4+AyTkdDUsjCYa6PzcqfKqpYp+EvAU=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXMovementMonitorFactory_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vbBA+k0ORMA5loFluEr0Of8PTF9G6tksyg5EYYyaHDA=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXMovementMonitorInterface_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sXdEf8dTsEUqosfa7iootRZKlxYmN9Vow1JnTGRc1PI=
+			</data>
+		</dict>
 		<key>PrivateHeaders/MBXNetworkStatus_Internal.h</key>
 		<dict>
 			<key>hash2</key>
@@ -1838,7 +2006,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xR0a7dVG2ln+OviEzNIOnQAE27UCGe0NrK/3milG7ds=
+			YWzokWxvr4/qy41Nf+BT6bsBvvKwM7X7g33MpLXOfCs=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MBXResourceData_Internal.h</key>
@@ -1873,7 +2041,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Ng+6IKXMQ34cSaA5NDoKXAj+r9Zg1s/NJGrRhEMFre0=
+			yoXcOvLaTFQIgNAJeN3wRxurN2EZzQdHnZD9Weaf3Zw=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MBXResourceLoadOptions_Internal.h</key>
@@ -1918,6 +2086,27 @@
 			chqk53NJwxDz3kyOQCL29MNq8PrY9EvMU1UDUvnaQi4=
 			</data>
 		</dict>
+		<key>PrivateHeaders/MBXSdkInfoRegistryFactory_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Lu00ivEDnnnfPPZE1tDEExRtYf2Q70pPxiRAZ6gbBZI=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXSdkInfoRegistryInterface_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HiOpwNVbhui1a+yb6RllEdj7dIpjNpGVuwhCubYAo7Y=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXSdkInformation_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bBCzh416Ejmmx4j2JAG98alcvTJtnJoFKDBD/s9dS6A=
+			</data>
+		</dict>
 		<key>PrivateHeaders/MBXSessionSKUIdentifier_Internal.h</key>
 		<dict>
 			<key>hash2</key>
@@ -1953,6 +2142,20 @@
 			Wm6cAcFS4IQDA9jZWWOUSKgdRWivb+665HE5pETfwwk=
 			</data>
 		</dict>
+		<key>PrivateHeaders/MBXTelemetryCollectionStateObserver_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ivpfFNRZXnNJby6ctdvDj41DgZI5zvyEEHDJSu29bEY=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MBXTelemetryCollectionState_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Hlc11yLoAf4kFnsaT5xi/ZO9xIdJUmAhA0u0mEA2CIc=
+			</data>
+		</dict>
 		<key>PrivateHeaders/MBXTelemetryService_Internal.h</key>
 		<dict>
 			<key>hash2</key>
@@ -1971,7 +2174,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vZD+euNX59E1va4MYRwe8BHQz+dwzyN2TtZY0zWn+D0=
+			fcQg2RoUfZkJmTa2Hz6lRKk/qpAZvzPJ2ZSrzt5e15I=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MBXTileRegionBooleanCallback_Internal.h</key>
@@ -2069,7 +2272,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			L4uxu9LN4s8Tg0B2UVzHlKXdvHUfE40kpf2n0SfukBs=
+			h0qGwGIlo9uE2fpxg+mG6LXdMV1AUsEsLejld7WbIFU=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MapboxBattery_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vCWhTu97GfZYoHpA0/rGxQIkgzSrtWQS8Tmuek+sU2A=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MapboxBillingService_Internal.h</key>
@@ -2090,7 +2300,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7JyPcpYSJqPOUrPiCeSj1U95mp3gz/wHIHB2p5UE+p8=
+			jChCZEKgPkFCsk/gi6l2tv9kd02SuMKTatkkp84too4=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MapboxConfigurationService_Internal.h</key>
@@ -2119,6 +2329,13 @@
 			<key>hash2</key>
 			<data>
 			yw5zKJWMeCtZkHXDttms7YBh2h8rdiIhyCGOtB9sU10=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MapboxFeatureTelemetry_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rxCAGcuyB2ebKRB66jCueAqc+ZduRbf8edK43E0bQPA=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MapboxHttp_Internal.h</key>
@@ -2156,6 +2373,13 @@
 			57b3SV7cRmt1ht+X9MJUV7KFO0dW9gnuFEyG76XUD2k=
 			</data>
 		</dict>
+		<key>PrivateHeaders/MapboxMovement_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			nAem7+jv6tJCKScVHQ6fIM4PtYDcGtu27kRZRz/BgB4=
+			</data>
+		</dict>
 		<key>PrivateHeaders/MapboxOfflineSwitch_Internal.h</key>
 		<dict>
 			<key>hash2</key>
@@ -2168,6 +2392,13 @@
 			<key>hash2</key>
 			<data>
 			jzjEwctyoJxr4CHiWZDTr6Syk+y+wDqef1uFR71K9uk=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MapboxSdkInfoRegistry_Internal.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HvVgp49Jibgl5Um8on8KByhejM5MRsktXZU74BBRgSg=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MapboxSettingsService_Internal.h</key>
@@ -2188,7 +2419,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mHf12xQj7+kRKmLNI43uasd5wqJjh8qrEljlONakQB8=
+			YlUohBPS3Ov0zbaLpR9F2ETy9mL4uC1F7eVjEQj3kck=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MapboxTelemetry_Internal.h</key>

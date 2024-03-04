@@ -1,4 +1,5 @@
 import UIKit
+import os
 
 public protocol GestureManagerDelegate: AnyObject {
 
@@ -115,6 +116,7 @@ public final class GestureManager: GestureHandlerDelegate {
     private let quickZoomGestureHandler: FocusableGestureHandlerProtocol
     private let singleTapGestureHandler: GestureHandler
     private let anyTouchGestureHandler: GestureHandler
+    private let interruptDecelerationGestureHandler: GestureHandler
     private let mapboxMap: MapboxMapProtocol
 
     internal init(panGestureHandler: PanGestureHandlerProtocol,
@@ -126,6 +128,7 @@ public final class GestureManager: GestureHandlerDelegate {
                   quickZoomGestureHandler: FocusableGestureHandlerProtocol,
                   singleTapGestureHandler: GestureHandler,
                   anyTouchGestureHandler: GestureHandler,
+                  interruptDecelerationGestureHandler: GestureHandler,
                   mapboxMap: MapboxMapProtocol) {
         self.panGestureHandler = panGestureHandler
         self.pinchGestureHandler = pinchGestureHandler
@@ -136,6 +139,7 @@ public final class GestureManager: GestureHandlerDelegate {
         self.singleTapGestureHandler = singleTapGestureHandler
         self.anyTouchGestureHandler = anyTouchGestureHandler
         self.rotateGestureHandler = rotateGestureHandler
+        self.interruptDecelerationGestureHandler = interruptDecelerationGestureHandler
         self.mapboxMap = mapboxMap
 
         panGestureHandler.delegate = self
@@ -147,7 +151,6 @@ public final class GestureManager: GestureHandlerDelegate {
         quickZoomGestureHandler.delegate = self
         singleTapGestureHandler.delegate = self
 
-        pinchGestureHandler.gestureRecognizer.require(toFail: panGestureHandler.gestureRecognizer)
         pitchGestureHandler.gestureRecognizer.require(toFail: panGestureHandler.gestureRecognizer)
         quickZoomGestureHandler.gestureRecognizer.require(toFail: doubleTapToZoomInGestureHandler.gestureRecognizer)
         singleTapGestureHandler.gestureRecognizer.require(toFail: doubleTapToZoomInGestureHandler.gestureRecognizer)
@@ -169,6 +172,7 @@ public final class GestureManager: GestureHandlerDelegate {
             }
         }
 
+        OSLog.poi.signpostEvent("Gesture began", message: "type: \(gestureType)")
         mapboxMap.beginGesture()
         delegate?.gestureManager(self, didBegin: gestureType)
     }
@@ -184,19 +188,13 @@ public final class GestureManager: GestureHandlerDelegate {
                 return
             }
         }
+
+        OSLog.poi.signpostEvent("Gesture ended", message: "type: \(gestureType)")
         mapboxMap.endGesture()
         delegate?.gestureManager(self, didEnd: gestureType, willAnimate: willAnimate)
     }
 
     internal func animationEnded(for gestureType: GestureType) {
         delegate?.gestureManager(self, didEndAnimatingFor: gestureType)
-    }
-}
-
-extension GestureManager: PinchGestureHandlerDelegate {
-    func pinchGestureHandlerDidUpdateGesture(_ handler: PinchGestureHandlerProtocol) {
-        // Because of a bug in core maps camera state has to be reset before updating pinch drag.
-        // This call will make sure that bearing is set to correct value after pinch dragging.
-        rotateGestureHandler.scheduleRotationUpdateIfNeeded()
     }
 }

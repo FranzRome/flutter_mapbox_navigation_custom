@@ -64,7 +64,6 @@ open class InstructionLabel: StylableLabel, InstructionPresenterDataSource {
         update()
     }
     
-    // Edited
     func shieldColor(from textColor: String) -> UIColor {
         switch textColor {
         case "black":

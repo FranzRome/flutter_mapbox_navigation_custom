@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/CameraManager.h</key>
 		<data>
-		LZUwWMxoI6xveMGMJBn7z7/2Cpg=
+		vRjRCym9SGru7n8jyx3k9hNDcA4=
 		</data>
 		<key>Headers/CoordinateBounds.h</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Headers/MBMCameraManager.h</key>
 		<data>
-		lx15skZWr3nNNwUPah9hPBuu1XI=
+		FJ1Omd8vlaJQIL85KrLCbb9Yjck=
 		</data>
 		<key>Headers/MBMCameraOptions.h</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Headers/MBMCanonicalTileID.h</key>
 		<data>
-		xpPAofdgYcCbQifvHZoSjqiK/dM=
+		Os3VRj+LAFANqEYH+aMs6ghpYDE=
 		</data>
 		<key>Headers/MBMConstrainMode.h</key>
 		<data>
@@ -63,6 +63,10 @@
 		<key>Headers/MBMCoordinateBoundsZoom.h</key>
 		<data>
 		r/BPjvLGdaXueEbzqhuUPtyLVJc=
+		</data>
+		<key>Headers/MBMCoordinateInfo.h</key>
+		<data>
+		y2Et6NK9VIegtdIyUsBiE75xeYs=
 		</data>
 		<key>Headers/MBMCustomGeometrySourceOptions.h</key>
 		<data>
@@ -138,7 +142,7 @@
 		</data>
 		<key>Headers/MBMMap.h</key>
 		<data>
-		ToHlBuusSdiwlYYRixkz+PULm1s=
+		Mbzv67CQU6P93r7p97x3wlTmrSI=
 		</data>
 		<key>Headers/MBMMapConstants.h</key>
 		<data>
@@ -146,11 +150,11 @@
 		</data>
 		<key>Headers/MBMMapDebugOptions.h</key>
 		<data>
-		TesBYazK4EpDDufO2zOIuZM4+7I=
+		UR71Y8wEmxmkWu6HhmsUUaxRGYY=
 		</data>
 		<key>Headers/MBMMapEvents.h</key>
 		<data>
-		E9DAcqMjuqRqLh1JpI6436vpTjE=
+		TETEAsDcPqh3fzf3bio/si7ICkU=
 		</data>
 		<key>Headers/MBMMapMemoryBudget.h</key>
 		<data>
@@ -178,7 +182,7 @@
 		</data>
 		<key>Headers/MBMMapSnapshotter.h</key>
 		<data>
-		5OHCex2S0PsKjdinNcFdvB359kE=
+		qjeFmTR6ephtrLNe/G62RjPVHg0=
 		</data>
 		<key>Headers/MBMMercatorCoordinate.h</key>
 		<data>
@@ -324,6 +328,10 @@
 		<data>
 		VvJ6Yq6X/FMsB4vYpVYmFE1ZULg=
 		</data>
+		<key>Headers/MBMTileCoverOptions.h</key>
+		<data>
+		Le+QNR6Ct9h8HzyrkXjE4TEw8EI=
+		</data>
 		<key>Headers/MBMTileOptions.h</key>
 		<data>
 		AISWndA05huiTGHAsAB2fRp5Btc=
@@ -358,7 +366,7 @@
 		</data>
 		<key>Headers/MBMViewAnnotationOptions.h</key>
 		<data>
-		iZDCBucGgQKc5VURx6gGm8xNRCk=
+		8lW+q2UE+4GOWDgp+t/A6pwutmI=
 		</data>
 		<key>Headers/MBMViewAnnotationPositionDescriptor.h</key>
 		<data>
@@ -370,7 +378,7 @@
 		</data>
 		<key>Headers/Map.h</key>
 		<data>
-		TVnXZfQpCHjbYgDYQ1L7LdqVM0Q=
+		g9j/gkz4NJK0c7FjLj7l3BNpEpA=
 		</data>
 		<key>Headers/MapConstants.h</key>
 		<data>
@@ -422,7 +430,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ScO5iLim+7jNI+0HHJOGVMFWfw4=
+		3xQnwSYFuTtVUCpzARI3v7WbBGA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -431,6 +439,10 @@
 		<key>Modules/module.private.modulemap</key>
 		<data>
 		7XyHrALPj0ZnAS9t1I5TJPbwyS8=
+		</data>
+		<key>PrivacyInfo.xcprivacy</key>
+		<data>
+		sKyE+8E8R0S1icmhE/2IujRpcZk=
 		</data>
 		<key>PrivateHeaders/AsyncOperationResultCallback_Internal.h</key>
 		<data>
@@ -446,7 +458,7 @@
 		</data>
 		<key>PrivateHeaders/MBMCameraManager_Internal.h</key>
 		<data>
-		0VdgflY6eO6xzVzED3h4E+7i8/k=
+		vtcpfaXqHO+1Jrz/EDw/1LN0xnE=
 		</data>
 		<key>PrivateHeaders/MBMMapClient_Internal.h</key>
 		<data>
@@ -462,7 +474,7 @@
 		</data>
 		<key>PrivateHeaders/MBMMap_Internal.h</key>
 		<data>
-		Co0y1pV2p5Q7utGe/Js7/zdaH1w=
+		7M/ZnOxiy/9dPShKPJ6f7lcG4Xc=
 		</data>
 		<key>PrivateHeaders/MBMMetalViewProvider.h</key>
 		<data>
@@ -518,7 +530,7 @@
 		</data>
 		<key>PrivateHeaders/MBMStyleManager_Internal.h</key>
 		<data>
-		R0kGyid3bRgZDOxwq2oUm57ejSs=
+		T4WuwRSp0Jo5vfWcykm0v4TX4mY=
 		</data>
 		<key>PrivateHeaders/MBMStylePackCallback_Internal.h</key>
 		<data>
@@ -591,7 +603,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2Sp/3vDj9tbh7cphu55I1KZWC3M45KWnhN4KlVbrvis=
+			VxUAGQPbJSTmAuITjGptKwLojqPc7VFTu6xDFNbO/tI=
 			</data>
 		</dict>
 		<key>Headers/CoordinateBounds.h</key>
@@ -633,7 +645,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			jsA5r1BFNgbObucnNLct8nien8qXGORGyK03vcq14eE=
+			c5BppmTIE3o97d2TFq9dpHV5h6lqr8InECV74M8csBI=
 			</data>
 		</dict>
 		<key>Headers/MBMCameraOptions.h</key>
@@ -661,7 +673,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			y5ysaypD+QSHTFGF8o2jdqgbcuxnLeKcvsb9T8AI7Oc=
+			ZPb0h2+OD6KlGJJ4aBaJnSF8jT5ETP+GVOHmzBLUg/Y=
 			</data>
 		</dict>
 		<key>Headers/MBMConstrainMode.h</key>
@@ -690,6 +702,13 @@
 			<key>hash2</key>
 			<data>
 			2Mfm5qAp9RnF+F3Xlho2f6cr8ilWOw/mFTQ8DGbphVI=
+			</data>
+		</dict>
+		<key>Headers/MBMCoordinateInfo.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ZxiZ3cGsCY9KjEbq1Ra0aa7p/PQ9DFOFOfNUie14N9k=
 			</data>
 		</dict>
 		<key>Headers/MBMCustomGeometrySourceOptions.h</key>
@@ -822,7 +841,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			TAptIk4hzaxmsPRspZDvAW6Y35J7hxs5qKqiPwKIjiA=
+			QvN2343Bai1oYpPGbQ/odNHpSbfGzPpbrk25Hj+RL90=
 			</data>
 		</dict>
 		<key>Headers/MBMMapConstants.h</key>
@@ -836,14 +855,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			E30dCJuPdCN4KIjVs2N9aMlU/O0p1UK1dfHGjobuUu4=
+			CGMl/UO+Kx4z98zxCT/seuiTsfEptbqOPzhjo9pWmnY=
 			</data>
 		</dict>
 		<key>Headers/MBMMapEvents.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			QBpeOezwFapY1zH/stUd0rBYbwbUP8ePrys3SXPociE=
+			pk3UGFYJy6Wxp/2Bfe98RZxaqvRiHv5aBoDISqTAoIA=
 			</data>
 		</dict>
 		<key>Headers/MBMMapMemoryBudget.h</key>
@@ -892,7 +911,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0S1VRH2LXqZ6jhYliScX25PDVhXL2HAntUnJ86pKXYE=
+			tqhF0rMcnsj48Q8QG//2+f+jzJcEw0iaI0U+NoqjkzM=
 			</data>
 		</dict>
 		<key>Headers/MBMMercatorCoordinate.h</key>
@@ -1147,6 +1166,13 @@
 			Ma79LKlgzdaJ3MYhTTip0xtJqlKV9Wm/90A4H3G837M=
 			</data>
 		</dict>
+		<key>Headers/MBMTileCoverOptions.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HeFQFUWDGtfWi2wzlMTsNofmFKod7yH/BhPOCbWkdDA=
+			</data>
+		</dict>
 		<key>Headers/MBMTileOptions.h</key>
 		<dict>
 			<key>hash2</key>
@@ -1207,7 +1233,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1ZJvsPcPDFUiR7lgUqLsbyDlplga1G2ZtTVo7tmH2E8=
+			mx9Ck6UVnyl7X6LTeMZ883JySqSJ/mZ9fDrdDkxGS9Q=
 			</data>
 		</dict>
 		<key>Headers/MBMViewAnnotationPositionDescriptor.h</key>
@@ -1228,7 +1254,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			UcJrxkH77Uy+a95urqg6977SZO5YSIRHvZUbOMBm6V4=
+			m9aib2sDjEySte8B2hBydu8xab5o1zBR8w7xhnuo8sU=
 			</data>
 		</dict>
 		<key>Headers/MapConstants.h</key>
@@ -1329,6 +1355,13 @@
 			SCpcrACsmbQiCwNpMl/IO8uKdIeoVtoG+UiY9uRBcOA=
 			</data>
 		</dict>
+		<key>PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			VLSwqZJBscKBDU0PnoBW92RnwG8nSRjc5IZ+8w9AvCY=
+			</data>
+		</dict>
 		<key>PrivateHeaders/AsyncOperationResultCallback_Internal.h</key>
 		<dict>
 			<key>hash2</key>
@@ -1354,7 +1387,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xan6hVyfbvvcpNV9j22g52LMtWg3ASay+fFMC8EVhV8=
+			AL2dGU8NA8TXAumzNubNagCS4mAmnV4WzXEFaalRVIo=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MBMMapClient_Internal.h</key>
@@ -1382,7 +1415,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5ah9OlHG97YVeWa7E3x0Cp0FOR6Q7KKdpvB77zADzbc=
+			OTuPZYbAqkHABggUArzsRdMtn/jAfrKWDzjS5X89OmM=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MBMMetalViewProvider.h</key>
@@ -1480,7 +1513,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OImIV54E/JifkWaqRraMs3hrmHg6nlVsokvC/HSxIIk=
+			bC1pCHEaodZxGglsnUh3B5cU6rRS5BmHo4XHsuk4BvI=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MBMStylePackCallback_Internal.h</key>

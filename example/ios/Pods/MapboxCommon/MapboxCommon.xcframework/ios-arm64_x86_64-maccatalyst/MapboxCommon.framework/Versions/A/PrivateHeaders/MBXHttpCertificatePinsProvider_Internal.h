@@ -4,6 +4,7 @@
 
 NS_SWIFT_NAME(HttpCertificatePinsProvider)
 __attribute__((visibility ("default")))
+__attribute__((deprecated))
 @interface MBXHttpCertificatePinsProvider : NSObject
 
 // This class provides custom init which should be called
@@ -12,6 +13,6 @@ __attribute__((visibility ("default")))
 // This class provides custom init which should be called
 + (nonnull instancetype)new NS_UNAVAILABLE;
 
-+ (nonnull NSDictionary<NSString *, NSArray<NSString *> *> *)getPins __attribute((ns_returns_retained));
++ (nonnull NSDictionary<NSString *, NSArray<NSString *> *> *)getPins __attribute((ns_returns_retained)) __attribute__((deprecated));
 
 @end

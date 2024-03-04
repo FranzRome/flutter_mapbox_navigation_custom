@@ -28,7 +28,7 @@ internal class AttributionDialogManager {
         }
     }
 
-    //swiftlint:disable function_body_length
+    //swiftlint:disable:next function_body_length
     internal func showTelemetryAlertController(from viewController: UIViewController) {
         let alert: UIAlertController
         let bundle = Bundle.mapboxMaps
@@ -162,6 +162,13 @@ extension AttributionDialogManager: InfoButtonOrnamentDelegate {
         }
 
         alert.addAction(telemetryAction)
+
+        let privacyPolicyAttribution = Attribution.makePrivacyPolicyAttribution()
+        let privacyPolicyAction = UIAlertAction(title: privacyPolicyAttribution.title, style: .default) { _ in
+            self.delegate?.attributionDialogManager(self, didTriggerActionFor: privacyPolicyAttribution)
+        }
+
+        alert.addAction(privacyPolicyAction)
 
         let cancelTitle = NSLocalizedString("CANCEL",
                                             tableName: Ornaments.localizableTableName,

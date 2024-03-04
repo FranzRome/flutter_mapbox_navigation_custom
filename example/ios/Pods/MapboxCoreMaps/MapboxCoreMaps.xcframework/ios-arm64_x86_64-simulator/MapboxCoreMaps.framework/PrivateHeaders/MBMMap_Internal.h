@@ -13,13 +13,13 @@
 
 - (void)queryRenderedFeaturesForShape:(nonnull NSArray<MBMScreenCoordinate *> *)shape
                               options:(nonnull MBMRenderedQueryOptions *)options
-                             callback:(nonnull MBMQueryFeaturesCallback)callback;
+                             callback:(nonnull MBMQueryFeaturesCallback)callback __attribute__((deprecated));
 - (void)queryRenderedFeaturesForBox:(nonnull MBMScreenBox *)box
                             options:(nonnull MBMRenderedQueryOptions *)options
-                           callback:(nonnull MBMQueryFeaturesCallback)callback;
+                           callback:(nonnull MBMQueryFeaturesCallback)callback __attribute__((deprecated));
 - (void)queryRenderedFeaturesForPixel:(nonnull MBMScreenCoordinate *)pixel
                               options:(nonnull MBMRenderedQueryOptions *)options
-                             callback:(nonnull MBMQueryFeaturesCallback)callback;
+                             callback:(nonnull MBMQueryFeaturesCallback)callback __attribute__((deprecated));
 - (nonnull MBXCancelable *)queryRenderedFeaturesForGeometry:(nonnull MBMRenderedQueryGeometry *)geometry
                                                     options:(nonnull MBMRenderedQueryOptions *)options
                                                    callback:(nonnull MBMQueryFeaturesCallback)callback __attribute((ns_returns_retained)) NS_REFINED_FOR_SWIFT;
@@ -46,4 +46,6 @@
                                                                          options:(nonnull MBMViewAnnotationOptions *)options __attribute((ns_returns_retained));
 - (nonnull MBXExpected<NSNull *, NSString *> *)removeViewAnnotationForIdentifier:(nonnull NSString *)identifier __attribute((ns_returns_retained));
 - (nonnull MBXExpected<MBMViewAnnotationOptions *, NSString *> *)getViewAnnotationOptionsForIdentifier:(nonnull NSString *)identifier __attribute((ns_returns_retained));
+- (nonnull NSArray<MBMCanonicalTileID *> *)tileCoverForTileCoverOptions:(nonnull MBMTileCoverOptions *)tileCoverOptions
+                                                          cameraOptions:(nullable MBMCameraOptions *)cameraOptions __attribute((ns_returns_retained)) NS_REFINED_FOR_SWIFT;
 @end

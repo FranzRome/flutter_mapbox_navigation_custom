@@ -149,21 +149,57 @@ public class MapboxRoutingProvider: RoutingProvider {
             case code, message, error
         }
     }
-    
+
     private func parseResponse<ResponseType: Codable>(
         requestId: RequestId, userInfo: [CodingUserInfoKey : Any],
+        result: Expected<DataRef, MapboxNavigationNative.RouterError>,
+        completion: @escaping (Result<ResponseType, DirectionsError>) -> Void
+    ) {
+        guard let dataRef = result.value else {
+            self.complete(requestId: requestId) {
+                completion(.failure(.noData))
+            }
+            return
+        }
+        
+        dataRef.withData { [self] data in
+            parseResponse(requestId: requestId,
+                          userInfo: userInfo,
+                          result: data,
+                          error: result.error as? Error,
+                          completion: completion)
+        }
+    }
+    
+    private func parseResponse<ResponseType: Codable>(
+        requestId: RequestId,
+        userInfo: [CodingUserInfoKey : Any],
         result: Expected<NSString, MapboxNavigationNative.RouterError>,
         completion: @escaping (Result<ResponseType, DirectionsError>) -> Void
     ) {
-        do {
-            let json = result.value as String?
-            guard let data = json?.data(using: .utf8) else {
-                self.complete(requestId: requestId) {
-                    completion(.failure(.noData))
-                }
-                return
+        let json = result.value as String?
+        guard let data = json?.data(using: .utf8) else {
+            self.complete(requestId: requestId) {
+                completion(.failure(.noData))
             }
-            
+            return
+        }
+        
+        parseResponse(requestId: requestId,
+                      userInfo: userInfo,
+                      result: data,
+                      error: result.error as? Error,
+                      completion: completion)
+    }
+    
+    private func parseResponse<ResponseType: Codable>(
+        requestId: RequestId,
+        userInfo: [CodingUserInfoKey : Any],
+        result data: Data,
+        error: Error?,
+        completion: @escaping (Result<ResponseType, DirectionsError>) -> Void
+    ) {
+        do {
             let decoder = JSONDecoder()
             decoder.userInfo = userInfo
             
@@ -171,7 +207,7 @@ public class MapboxRoutingProvider: RoutingProvider {
                 let apiError = DirectionsError(code: nil,
                                                message: nil,
                                                response: nil,
-                                               underlyingError: result.error as? Error)
+                                               underlyingError: error)
 
                 self.complete(requestId: requestId) {
                     completion(.failure(apiError))
@@ -183,7 +219,7 @@ public class MapboxRoutingProvider: RoutingProvider {
                 let apiError = DirectionsError(code: disposition.code,
                                                message: disposition.message,
                                                response: nil,
-                                               underlyingError: result.error as? Error)
+                                               underlyingError: error)
 
                 self.complete(requestId: requestId) {
                     completion(.failure(apiError))
@@ -209,7 +245,7 @@ public class MapboxRoutingProvider: RoutingProvider {
         let directionsUri = settings.directions.url(forCalculating: options).removingSKU().absoluteString
         var requestId: RequestId!
         
-        requestId = router.getRouteForDirectionsUri(directionsUri, options: GetRouteOptions(timeoutSeconds: nil)) { [weak self] (result, origin) in
+        requestId = router.getRouteForDirectionsUri(directionsUri, options: GetRouteOptions(timeoutSeconds: nil)) { [weak self] (result: Expected<DataRef, RouterError>, origin: RouterOrigin) in
             guard let self = self else { return }
             
             self.parseResponse(requestId: requestId,
@@ -350,9 +386,9 @@ public class MapboxRoutingProvider: RoutingProvider {
         guard case let .route(routeOptions) = indexedRouteResponse.routeResponse.options else {
             preconditionFailure("Invalid route data passed for refreshing. Expected `RouteResponse` containing `.route` `ResponseOptions` but got `.match`.")
         }
-        
-        let session = (options: routeOptions as DirectionsOptions,
-                       credentials: self.settings.directions.credentials)
+
+        let credentials = settings.directions.credentials
+        let session = (options: routeOptions as DirectionsOptions, credentials: credentials)
         
         guard let responseIdentifier = indexedRouteResponse.routeResponse.identifier else {
             DispatchQueue.main.async {
@@ -368,6 +404,8 @@ public class MapboxRoutingProvider: RoutingProvider {
                                                  routeIndex: routeIndex,
                                                  legIndex: startLegIndex,
                                                  routingProfile: routeOptions.profileIdentifier.nativeProfile,
+                                                 baseURL: credentials.host.absoluteString,
+                                                 token: credentials.accessToken ?? "",
                                                  currentRouteGeometryIndex: currentRouteShapeIndex.map { NSNumber(value: $0) },
                                                  additionalParams: [:])
 

@@ -235,16 +235,10 @@ open class BaseInstructionsBannerView: UIControl {
     static let maneuverViewSize = CGSize(width: 38, height: 38)
     static let stepListIndicatorViewSize = CGSize(width: 30, height: 5)
     
-    // Edited
     func setupViews() {
-        let myGreen: UIColor = UIColor(red: 0, green: 0.254, blue: 0.123, alpha: 1)
-        
-        self.backgroundColor = myGreen
-        
         let maneuverView = ManeuverView()
-        maneuverView.backgroundColor = myGreen
+        maneuverView.backgroundColor = .clear
         maneuverView.translatesAutoresizingMaskIntoConstraints = false
-        maneuverView.primaryColor = .white
         addSubview(maneuverView)
         self.maneuverView = maneuverView
         
@@ -252,7 +246,6 @@ open class BaseInstructionsBannerView: UIControl {
         distanceLabel.translatesAutoresizingMaskIntoConstraints = false
         distanceLabel.adjustsFontSizeToFitWidth = true
         distanceLabel.minimumScaleFactor = 16.0 / 22.0
-        distanceLabel.textColor = .white
         addSubview(distanceLabel)
         self.distanceLabel = distanceLabel
         
@@ -264,7 +257,6 @@ open class BaseInstructionsBannerView: UIControl {
         primaryLabel.numberOfLines = 1
         primaryLabel.minimumScaleFactor = 20.0 / 30.0
         primaryLabel.lineBreakMode = .byTruncatingTail
-        primaryLabel.textColor = .white
         addSubview(primaryLabel)
         self.primaryLabel = primaryLabel
         

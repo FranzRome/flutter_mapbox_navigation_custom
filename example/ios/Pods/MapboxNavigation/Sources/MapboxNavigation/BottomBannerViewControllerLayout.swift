@@ -100,18 +100,17 @@ extension BottomBannerViewController {
         layoutConstraints.append(trailingSeparatorView.leadingAnchor.constraint(equalTo: bottomBannerView.trailingAnchor))
     }
     
-    // Edited
     fileprivate func setupVerticalRegularLayout(_ layoutConstraints: inout [NSLayoutConstraint]) {
         layoutConstraints.append(bottomBannerView.heightAnchor.constraint(equalToConstant: 80))
         
-        layoutConstraints.append(timeRemainingLabel.centerXAnchor.constraint(equalTo: bottomBannerView.centerXAnchor, constant: -20))
-        layoutConstraints.append(timeRemainingLabel.topAnchor.constraint(equalTo: bottomBannerView.topAnchor, constant: 8))
+        layoutConstraints.append(timeRemainingLabel.leadingAnchor.constraint(equalTo: bottomBannerView.leadingAnchor, constant: 10))
+        layoutConstraints.append(timeRemainingLabel.lastBaselineAnchor.constraint(equalTo: bottomBannerView.centerYAnchor, constant: 0))
         
-        layoutConstraints.append(distanceRemainingLabel.trailingAnchor.constraint(equalTo: timeRemainingLabel.centerXAnchor, constant: -10))
+        layoutConstraints.append(distanceRemainingLabel.leadingAnchor.constraint(equalTo: timeRemainingLabel.leadingAnchor))
         layoutConstraints.append(distanceRemainingLabel.topAnchor.constraint(equalTo: timeRemainingLabel.bottomAnchor, constant: 0))
         
-        layoutConstraints.append(arrivalTimeLabel.leadingAnchor.constraint(equalTo: timeRemainingLabel.centerXAnchor, constant: 10))
-        layoutConstraints.append(arrivalTimeLabel.centerYAnchor.constraint(equalTo: distanceRemainingLabel.centerYAnchor))
+        layoutConstraints.append(arrivalTimeLabel.centerYAnchor.constraint(equalTo: bottomBannerView.centerYAnchor))
+        layoutConstraints.append(arrivalTimeLabel.trailingAnchor.constraint(equalTo: verticalDividerView.leadingAnchor, constant: -10))
         
         layoutConstraints.append(cancelButton.widthAnchor.constraint(equalTo: bottomBannerView.heightAnchor))
         layoutConstraints.append(cancelButton.topAnchor.constraint(equalTo: bottomBannerView.topAnchor))

@@ -113,6 +113,8 @@ internal protocol StyleManagerProtocol {
         _ property: String,
         value: Any) -> Expected<NSNull, NSString>
 
+    func addStyleModel(forModelId modelId: String, modelUri: String) -> Expected<NSNull, NSString>
+
     // swiftlint:disable:next function_parameter_count
     func addStyleImage(
         forImageId imageId: String,
@@ -144,6 +146,12 @@ internal protocol StyleManagerProtocol {
 
     func __setStyleGeoJSONSourceDataForSourceId(
         _ sourceId: String,
+        data: MapboxCoreMaps.GeoJSONSourceData
+    ) -> Expected<NSNull, NSString>
+
+    func __setStyleGeoJSONSourceDataForSourceId(
+        _ sourceId: String,
+        dataId: String,
         data: MapboxCoreMaps.GeoJSONSourceData
     ) -> Expected<NSNull, NSString>
 }

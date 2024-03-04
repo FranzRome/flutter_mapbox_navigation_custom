@@ -88,6 +88,8 @@ open class RouteController: NSObject {
             }
         }
     }
+
+    private var routeAlerts: [String: UpcomingRouteAlert] = [:]
     
     // MARK: Tracking the Progress
     
@@ -240,6 +242,7 @@ open class RouteController: NSObject {
 
     private let navigatorType: CoreNavigator.Type
     private let routeParserType: RouteParser.Type
+    private let navigationSessionManager: NavigationSessionManager
 
     var navigator: MapboxNavigationNative.Navigator {
         return sharedNavigator.navigator
@@ -275,21 +278,24 @@ open class RouteController: NSObject {
      Asynchronously updates NavNative navigator with the new `IndexedRouteResponse`.
      - parameter indexedRouteResponse: New route response to apply to the navigator.
      - parameter legIndex: A leg index, to start routing from.
+     - parameter reason: A reason for updating navigator.
      - parameter completion: A completion that will be called once the navigator is updated indicating
      whether the change was successful.
      */
     private func updateNavigator(with indexedRouteResponse: IndexedRouteResponse,
                                  fromLegIndex legIndex: Int,
+                                 reason: RouteChangeReason,
                                  completion: ((Result<(RouteInfo?, [AlternativeRoute]), Error>) -> Void)?) {
         guard let newMainRoute = indexedRouteResponse.currentRoute,
               let routesData = indexedRouteResponse.routesData(routeParserType: routeParserType) else {
             completion?(.failure(RouteControllerError.failedToSerializeRoute))
             return
         }
-        self.sharedNavigator.setRoutes(routesData,
-                                       uuid: sessionUUID,
-                                       legIndex: UInt32(legIndex),
-                                       completion:  { [weak self] result in
+        sharedNavigator.setRoutes(routesData,
+                                  uuid: sessionUUID,
+                                  legIndex: UInt32(legIndex),
+                                  reason: reason,
+                                  completion:  { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -297,6 +303,10 @@ open class RouteController: NSObject {
                 let alternativeRoutes = info.1.compactMap {
                     AlternativeRoute(mainRoute: newMainRoute,
                                      alternativeRoute: $0)
+                }
+                let alerts = routesData.primaryRoute().getRouteInfo().alerts
+                self.routeAlerts = alerts.reduce(into: [:]) { dictionary, alert in
+                    dictionary[alert.roadObject.id] = alert
                 }
                 completion?(.success((info.0, alternativeRoutes)))
                 
@@ -360,12 +370,13 @@ open class RouteController: NSObject {
     public func finishRouting() {
         guard !hasFinishedRouting else { return }
         hasFinishedRouting = true
+        navigationSessionManager.reportStopNavigation()
         removeRoutes(completion: nil)
         BillingHandler.shared.stopBillingSession(with: sessionUUID)
         unsubscribeNotifications()
         routeTask?.cancel()
     }
-    
+
     private func update(to status: NavigationStatus) {
         guard let rawLocation = rawLocation,
               isValidNavigationStatus(status)
@@ -378,7 +389,6 @@ open class RouteController: NSObject {
                status: status,
                with: snappedLocation,
                rawLocation: rawLocation,
-               upcomingRouteAlerts: status.upcomingRouteAlerts,
                mapMatchingResult: MapMatchingResult(status: status),
                routeShapeIndex: Int(status.geometryIndex))
         
@@ -396,13 +406,27 @@ open class RouteController: NSObject {
             refreshAndCheckForFasterRoute(from: snappedLocation, routeProgress: routeProgress)
         }
     }
+
+    func upcomingRouteAlerts(with status: NavigationStatus) -> [RouteAlert] {
+        let routeAlertsUpdates = status.upcomingRouteAlertUpdates
+        return routeAlertsUpdates.compactMap {
+            guard let alert = routeAlerts[$0.id] else { return nil }
+            return RouteAlert(alert, distanceToStart: $0.distanceToStart)
+        }
+    }
     
     @objc func fallbackToOffline(_ notification: Notification) {
-        updateNavigator(with: indexedRouteResponse, fromLegIndex: self.routeProgress.legIndex, completion: nil)
+        updateNavigator(with: indexedRouteResponse,
+                        fromLegIndex: self.routeProgress.legIndex,
+                        reason: .fallbackToOffline,
+                        completion: nil)
     }
     
     @objc func restoreToOnline(_ notification: Notification) {
-        updateNavigator(with: indexedRouteResponse, fromLegIndex: self.routeProgress.legIndex, completion: nil)
+        updateNavigator(with: indexedRouteResponse,
+                        fromLegIndex: self.routeProgress.legIndex,
+                        reason: .restoreToOnline,
+                        completion: nil)
     }
 
     func isValidNavigationStatus(_ status: NavigationStatus) -> Bool {
@@ -468,7 +492,8 @@ open class RouteController: NSObject {
         let userInfo: [NotificationUserInfoKey: Any] = [
             NotificationUserInfoKey.roadNameKey: status.roadName,
             NotificationUserInfoKey.localizedRoadNameKey: status.localizedRoadName(),
-            NotificationUserInfoKey.routeShieldRepresentationKey: status.routeShieldRepresentation
+            NotificationUserInfoKey.routeShieldRepresentationKey: status.routeShieldRepresentation,
+            NotificationUserInfoKey.localizedRouteShieldRepresentationKey: status.localizedRouteShieldRepresentation()
         ]
         NotificationCenter.default.post(name: .currentRoadNameDidChange, object: self, userInfo: userInfo)
     }
@@ -505,10 +530,14 @@ open class RouteController: NSObject {
         }
     }
     
-    private func update(progress: RouteProgress, status: NavigationStatus, with location: CLLocation, rawLocation: CLLocation, upcomingRouteAlerts routeAlerts: [UpcomingRouteAlert], mapMatchingResult: MapMatchingResult, routeShapeIndex: Int) {
+    private func update(progress: RouteProgress,
+                        status: NavigationStatus,
+                        with location: CLLocation,
+                        rawLocation: CLLocation,
+                        mapMatchingResult: MapMatchingResult,
+                        routeShapeIndex: Int) {
         progress.updateDistanceTraveled(navigationStatus: status)
-
-        progress.upcomingRouteAlerts = routeAlerts.map { RouteAlert($0) }
+        progress.upcomingRouteAlerts = upcomingRouteAlerts(with: status)
         progress.shapeIndex = routeShapeIndex
         
         //Fire the delegate method
@@ -607,6 +636,11 @@ open class RouteController: NSObject {
                   customRoutingProvider: customRoutingProvider,
                   dataSource: source)
     }
+
+    @objc private func applicationWillTerminate(_ notification: NSNotification) {
+        guard !hasFinishedRouting else { return }
+        navigationSessionManager.reportStopNavigation()
+    }
     
     private static func checkUniqueInstance() {
         Self.instanceLock.lock()
@@ -631,6 +665,7 @@ open class RouteController: NSObject {
 
         self.navigatorType = Navigator.self
         self.routeParserType = RouteParser.self
+        self.navigationSessionManager = NavigationSessionManagerImp.shared
         self.indexedRouteResponse = indexedRouteResponse
         self.dataSource = source
 
@@ -654,7 +689,8 @@ open class RouteController: NSObject {
          customRoutingProvider: RoutingProvider?,
          dataSource source: RouterDataSource,
          navigatorType: CoreNavigator.Type,
-         routeParserType: RouteParser.Type) {
+         routeParserType: RouteParser.Type,
+         navigationSessionManager: NavigationSessionManager) {
         Self.checkUniqueInstance()
 
         self.navigatorType = navigatorType
@@ -663,6 +699,7 @@ open class RouteController: NSObject {
         self.dataSource = source
         let options = indexedRouteResponse.validatedRouteOptions
         self.routeProgress = RouteProgress(route: indexedRouteResponse.currentRoute!, options: options)
+        self.navigationSessionManager = navigationSessionManager
 
         super.init()
 
@@ -683,8 +720,11 @@ open class RouteController: NSObject {
         BillingHandler.shared.beginBillingSession(for: .activeGuidance, uuid: sessionUUID)
 
         subscribeNotifications()
-        updateNavigator(with: self.indexedRouteResponse, fromLegIndex: 0) { [weak self] _ in
+        updateNavigator(with: self.indexedRouteResponse,
+                        fromLegIndex: 0,
+                        reason: .startNewRoute) { [weak self] _ in
             self?.isInitialized = true
+            self?.navigationSessionManager.reportStartNavigation()
         }
     }
     
@@ -720,6 +760,10 @@ open class RouteController: NSObject {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(navigatorWantsSwitchToCoincideOnlineRoute),
                                                name: .navigatorWantsSwitchToCoincideOnlineRoute,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWillTerminate(_:)),
+                                               name: UIApplication.willTerminateNotification,
                                                object: nil)
         rerouteController.delegate = self
     }
@@ -828,7 +872,8 @@ extension RouteController: Router {
                 }
                 self.updateRoute(with: indexedResponse,
                                  routeOptions: routeOptions,
-                                 isProactive: false) { [weak self] success in
+                                 isProactive: false,
+                                 isAlternative: false) { [weak self] success in
                     self?.isRerouting = false
                 }
             case let .failure(error):
@@ -842,25 +887,35 @@ extension RouteController: Router {
                             routeOptions: RouteOptions?,
                             completion: ((Bool) -> Void)?) {
         guard !hasFinishedRouting else { return }
-        updateRoute(with: indexedRouteResponse, routeOptions: routeOptions, isProactive: false, completion: completion)
+        updateRoute(with: indexedRouteResponse,
+                    routeOptions: routeOptions,
+                    isProactive: false,
+                    isAlternative: false,
+                    completion: completion)
     }
 
     func updateRoute(with indexedRouteResponse: IndexedRouteResponse,
                      routeOptions: RouteOptions?,
                      isProactive: Bool,
+                     isAlternative: Bool,
                      completion: ((Bool) -> Void)?) {
         guard let route = indexedRouteResponse.currentRoute else {
             preconditionFailure("`indexedRouteResponse` does not contain route for index `\(indexedRouteResponse.routeIndex)` when updating route.")
         }
-        if shouldStartNewBillingSession(for: route, routeOptions: routeOptions) {
+        let shouldStartNewBillingSession = shouldStartNewBillingSession(for: route, routeOptions: routeOptions)
+        if shouldStartNewBillingSession {
             BillingHandler.shared.stopBillingSession(with: sessionUUID)
             BillingHandler.shared.beginBillingSession(for: .activeGuidance, uuid: sessionUUID)
         }
 
         let routeOptions = routeOptions ?? routeProgress.routeOptions
         let routeProgress = RouteProgress(route: route, options: routeOptions)
+        let reason = routeChangeReason(shouldStartNewBillingSession: shouldStartNewBillingSession,
+                                       isProactiveRerouting: isProactive,
+                                       isSwitchingToAlternative: isAlternative)
         updateNavigator(with: indexedRouteResponse,
-                        fromLegIndex: routeProgress.legIndex) { [weak self] result in
+                        fromLegIndex: routeProgress.legIndex,
+                        reason: reason) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
@@ -876,6 +931,22 @@ extension RouteController: Router {
                 completion?(false)
             }
         }
+    }
+
+    private func routeChangeReason(shouldStartNewBillingSession: Bool,
+                                   isProactiveRerouting: Bool,
+                                   isSwitchingToAlternative: Bool) -> RouteChangeReason {
+        let reason: RouteChangeReason
+        if isProactiveRerouting {
+            reason = .fastestRouteAvailable
+        } else if isSwitchingToAlternative {
+            reason = .switchToAlternative
+        } else if shouldStartNewBillingSession {
+            reason = .startNewRoute
+        } else {
+            reason = .reroute
+        }
+        return reason
     }
 
     private func removeRoutes(completion: ((Error?) -> Void)?) {
@@ -942,6 +1013,7 @@ extension RouteController: ReroutingControllerDelegate {
         updateRoute(with: newRouteResponse,
                     routeOptions: options,
                     isProactive: false,
+                    isAlternative: true,
                     completion: { [weak self] success in
             guard let self = self else { return }
             var userInfo = [RouteController.NotificationUserInfoKey: Any]()
@@ -979,7 +1051,8 @@ extension RouteController: ReroutingControllerDelegate {
                                                         responseOrigin: routeOrigin)
         updateRoute(with: indexedRouteResponse,
                     routeOptions: options,
-                    isProactive: false) { [weak self] _ in
+                    isProactive: false,
+                    isAlternative: false) { [weak self] _ in
             self?.isRerouting = false
         }
     }
@@ -1085,7 +1158,7 @@ extension RouteController {
             return
         }
         guard let decoded = RerouteController.decode(routeRequest: onlineRoute.getRequestUri(),
-                                                     routeResponse: onlineRoute.getResponseJson()) else {
+                                                     routeResponse: onlineRoute.getResponseJsonRef()) else {
             return
         }
         
@@ -1097,7 +1170,8 @@ extension RouteController {
         }
         
         updateNavigator(with: indexedRouteResponse,
-                        fromLegIndex: 0) { [weak self] result in
+                        fromLegIndex: 0,
+                        reason: .switchToOnline) { [weak self] result in
             guard let self = self else { return }
             self.routeProgress = RouteProgress(route: newRoute,
                                                 options: decoded.routeOptions)
@@ -1112,7 +1186,6 @@ extension RouteController {
         }
     }
 }
-
 
 enum RouteControllerError: Error {
     case internalError

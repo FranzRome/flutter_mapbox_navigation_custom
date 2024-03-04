@@ -5,6 +5,7 @@ import MapboxDirections
 import MapboxCoreNavigation
 import MapboxNavigation
 
+@available(iOS 13.0, *)
 public class FlutterMapboxNavigationViewFactory : NSObject, FlutterPlatformViewFactory
 {
     let messenger: FlutterBinaryMessenger

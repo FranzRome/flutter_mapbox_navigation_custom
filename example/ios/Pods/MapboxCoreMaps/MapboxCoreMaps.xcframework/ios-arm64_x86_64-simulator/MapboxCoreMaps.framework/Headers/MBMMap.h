@@ -10,6 +10,8 @@
 @class MBXFeature;
 #import <MapboxCoreMaps/MBMCameraManager.h>
 
+@class MBMCameraOptions;
+@class MBMCanonicalTileID;
 @class MBMMapMemoryBudget;
 @class MBMMapOptions;
 @class MBMRenderCacheOptions;
@@ -20,6 +22,7 @@
 @class MBMScreenCoordinate;
 @class MBMSize;
 @class MBMSourceQueryOptions;
+@class MBMTileCoverOptions;
 @class MBMViewAnnotationOptions;
 @class MBXCancelable;
 @protocol MBMMapClient;
@@ -140,7 +143,7 @@ __attribute__((visibility ("default")))
  * @return `true` when the map is completely rendered, `false` otherwise.
  *
  */
-- (BOOL)isMapLoaded;
+- (BOOL)isMapLoaded __attribute__((deprecated));
 /**
  * Updates the state object of a feature within a style source.
  *

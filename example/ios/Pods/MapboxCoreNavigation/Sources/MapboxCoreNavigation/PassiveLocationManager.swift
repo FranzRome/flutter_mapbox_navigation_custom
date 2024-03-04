@@ -62,6 +62,8 @@ open class PassiveLocationManager: NSObject {
     }()
 
     private let navigatorType: CoreNavigator.Type
+
+    private let navigationSessionManager: NavigationSessionManager
     
     /**
      The underlying navigator that performs map matching.
@@ -211,26 +213,24 @@ open class PassiveLocationManager: NSObject {
             Match(legs: [], shape: nil, distance: -1, expectedTravelTime: -1, confidence: $0.proba, weight: .routability(value: 1))
         }
 
-        switch status.speedLimit?.localeSign {
+        switch status.speedLimit.localeSign {
         case .mutcd:
             signStandard = .mutcd
         case .vienna:
             signStandard = .viennaConvention
-        case .none:
-            signStandard = nil
-        case .some(_):
+        @unknown default:
+            assertionFailure("Unknown native speed limit sign locale.")
             break
         }
 
-        if let speed = status.speedLimit?.speedKmph as? Double {
-            switch status.speedLimit?.localeUnit {
+        if let speed = status.speedLimit.speed?.doubleValue {
+            switch status.speedLimit.localeUnit {
             case .milesPerHour:
-                speedLimit = Measurement(value: speed, unit: .kilometersPerHour).converted(to: .milesPerHour)
+                speedLimit = Measurement(value: speed, unit: .milesPerHour)
             case .kilometresPerHour:
                 speedLimit = Measurement(value: speed, unit: .kilometersPerHour)
-            case .none:
-                speedLimit = nil
-            case .some(_):
+            @unknown default:
+                assertionFailure("Unknown native speed limit unit.")
                 break
             }
         }
@@ -241,7 +241,8 @@ open class PassiveLocationManager: NSObject {
             .matchesKey: matches,
             .roadNameKey: status.roadName,
             .localizedRoadNameKey: status.localizedRoadName(),
-            .routeShieldRepresentationKey: status.routeShieldRepresentation
+            .routeShieldRepresentationKey: status.routeShieldRepresentation,
+            .localizedRouteShieldRepresentationKey: status.localizedRouteShieldRepresentation()
         ]
         if let speedLimit = speedLimit {
             userInfo[.speedLimitKey] = speedLimit
@@ -259,10 +260,12 @@ open class PassiveLocationManager: NSObject {
          eventsManagerType: NavigationEventsManager.Type?,
          userInfo: [String: String?]?,
          datasetProfileIdentifier: ProfileIdentifier?,
-         navigatorType: CoreNavigator.Type) {
+         navigatorType: CoreNavigator.Type,
+         navigationSessionManager: NavigationSessionManager) {
         self.navigatorType = navigatorType
         self.directions = directions
         self.systemLocationManager = systemLocationManager
+        self.navigationSessionManager = navigationSessionManager
 
         super.init()
 
@@ -293,6 +296,7 @@ open class PassiveLocationManager: NSObject {
         self.navigatorType = Navigator.self
         self.directions = directions
         self.systemLocationManager = systemLocationManager ?? NavigationLocationManager()
+        self.navigationSessionManager = NavigationSessionManagerImp.shared
 
         super.init()
 
@@ -325,10 +329,12 @@ open class PassiveLocationManager: NSObject {
         subscribeNotifications()
 
         BillingHandler.shared.beginBillingSession(for: .freeDrive, uuid: sessionUUID)
+        navigationSessionManager.reportStartNavigation()
     }
     
     deinit {
         BillingHandler.shared.stopBillingSession(with: sessionUUID)
+        navigationSessionManager.reportStopNavigation()
         eventsManager.withBackupDataSource(active: nil, passive: self) {
             if self.rawLocation != nil {
                 self.eventsManager.sendPassiveNavigationStop()
@@ -429,8 +435,6 @@ extension TileEndpointConfiguration {
                   dataset: datasetProfileIdentifier.rawValue,
                   version: tilesVersion,
                   token: accessToken,
-                  userAgent: URLSession.userAgent,
-                  navigatorVersion: "",
                   isFallback: targetVersion != nil,
                   versionBeforeFallback: targetVersion ?? tilesVersion,
                   minDiffInDaysToConsiderServerVersion: minimumDaysToPersistVersion as NSNumber?)

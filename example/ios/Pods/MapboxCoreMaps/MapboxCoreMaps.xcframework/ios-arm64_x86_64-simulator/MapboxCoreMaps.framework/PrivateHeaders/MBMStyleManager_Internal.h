@@ -32,6 +32,9 @@
 - (nonnull MBXExpected<NSNull *, NSString *> *)setStyleSourcePropertiesForSourceId:(nonnull NSString *)sourceId
                                                                         properties:(nonnull id)properties __attribute((ns_returns_retained));
 - (nonnull MBXExpected<NSNull *, NSString *> *)setStyleGeoJSONSourceDataForSourceId:(nonnull NSString *)sourceId
+                                                                               data:(nonnull MBMGeoJSONSourceData *)data __attribute((ns_returns_retained)) NS_REFINED_FOR_SWIFT __attribute__((deprecated));
+- (nonnull MBXExpected<NSNull *, NSString *> *)setStyleGeoJSONSourceDataForSourceId:(nonnull NSString *)sourceId
+                                                                             dataId:(nonnull NSString *)dataId
                                                                                data:(nonnull MBMGeoJSONSourceData *)data __attribute((ns_returns_retained)) NS_REFINED_FOR_SWIFT;
 - (nonnull MBXExpected<NSNull *, NSString *> *)updateStyleImageSourceImageForSourceId:(nonnull NSString *)sourceId
                                                                                 image:(nonnull MBMImage *)image __attribute((ns_returns_retained));

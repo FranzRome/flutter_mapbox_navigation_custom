@@ -93,8 +93,6 @@ class NativeHandlersFactory {
                     tileStore: tileStore,
                     inMemoryTileCache: nil,
                     onDiskTileCache: nil,
-                    mapMatchingSpatialCache: nil,
-                    threadsCount: nil,
                     endpointConfig: endpointConfig)
     }()
     
@@ -134,10 +132,12 @@ class NativeHandlersFactory {
     }
     
     static func configHandle(by configFactoryType: ConfigFactory.Type = ConfigFactory.self) -> ConfigHandle {
+        var features = ["useInternalReroute": true]
+        if NavigationTelemetryConfiguration.useNavNativeTelemetryEvents {
+            features["useTelemetryNavigationEvents"] = true
+        }
         let defaultConfig = [
-            customConfigFeaturesKey: [
-                "useInternalReroute": true
-            ]
+            customConfigFeaturesKey: features
         ]
         
         var customConfig = UserDefaults.standard.dictionary(forKey: customConfigKey) ?? [:]

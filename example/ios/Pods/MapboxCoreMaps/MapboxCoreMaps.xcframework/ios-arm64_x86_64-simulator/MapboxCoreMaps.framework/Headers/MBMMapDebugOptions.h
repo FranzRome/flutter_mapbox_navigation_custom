@@ -13,7 +13,10 @@ typedef NS_ENUM(NSInteger, MBMMapDebugOptions)
     MBMMapDebugOptionsTileBorders,
     /** Each tile shows its tile coordinate (x/y/z) in the upper-left corner. */
     MBMMapDebugOptionsParseStatus,
-    /** Each tile shows a timestamp indicating when it was loaded. */
+    /**
+     * Each tile shows a timestamps with modified and expires dates or n/a if
+     * timestamp is not available.
+     */
     MBMMapDebugOptionsTimestamps,
     /**
      * Edges of glyphs and symbols are shown as faint, green lines to help

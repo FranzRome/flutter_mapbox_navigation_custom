@@ -2,6 +2,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapboxCommon/MBXBillingSessionStatus_Internal.h>
+#import <MapboxCommon/MBXMaploadSKUIdentifier_Internal.h>
 #import <MapboxCommon/MBXOnBillingServiceError_Internal.h>
 #import <MapboxCommon/MBXSessionSKUIdentifier_Internal.h>
 #import <MapboxCommon/MBXUserSKUIdentifier_Internal.h>
@@ -12,6 +13,9 @@ NS_SWIFT_NAME(BillingServiceInterface)
                                     userAgent:(nonnull NSString *)userAgent
                                 skuIdentifier:(MBXUserSKUIdentifier)skuIdentifier
                                      callback:(nonnull MBXOnBillingServiceError)callback;
+- (void)triggerMaploadBillingEventForAccessToken:(nonnull NSString *)accessToken
+                                   skuIdentifier:(MBXMaploadSKUIdentifier)skuIdentifier
+                                        callback:(nonnull MBXOnBillingServiceError)callback;
 - (void)beginBillingSessionForAccessToken:(nonnull NSString *)accessToken
                                 userAgent:(nonnull NSString *)userAgent
                             skuIdentifier:(MBXSessionSKUIdentifier)skuIdentifier

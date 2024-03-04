@@ -71,6 +71,7 @@ open class TopBannerViewController: UIViewController {
     }
     
     override open func viewDidLoad() {
+        view.backgroundColor = .clear
         super.viewDidLoad()
         setupViews()
         addConstraints()

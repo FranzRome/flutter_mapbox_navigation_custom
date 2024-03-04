@@ -5,6 +5,7 @@ import MapboxDirections
 import MapboxCoreNavigation
 import MapboxNavigation
 
+@available(iOS 13.0, *)
 public class FlutterMapboxNavigationPlugin: NavigationFactory, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "flutter_mapbox_navigation", binaryMessenger: registrar.messenger())

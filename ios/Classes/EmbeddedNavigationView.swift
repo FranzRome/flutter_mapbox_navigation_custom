@@ -5,6 +5,7 @@ import MapboxDirections
 import MapboxCoreNavigation
 import MapboxNavigation
 
+@available(iOS 13.0, *)
 public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformView
 {
     let frame: CGRect
@@ -290,14 +291,21 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
         if(_mapStyleUrlNight != nil){
             nightStyle.mapStyleURL = URL(string: _mapStyleUrlNight!)!
         }
-        let navigationOptions = NavigationOptions(styles: [dayStyle, nightStyle], navigationService: navigationService)
-
+        
+        let bottomBanner = CustomBottomBarViewController()
+        let navigationOptions = NavigationOptions(
+            styles: [dayStyle, nightStyle],
+            navigationService: navigationService,
+            bottomBanner: bottomBanner
+        )
+      
+        
         // Remove previous navigation view and controller if any
         if(_navigationViewController?.view != nil){
             _navigationViewController!.view.removeFromSuperview()
             _navigationViewController?.removeFromParent()
         }
-
+        
         _navigationViewController = NavigationViewController(for: response, routeIndex: selectedRouteIndex, routeOptions: routeOptions!, navigationOptions: navigationOptions)
         _navigationViewController!.delegate = self
 
@@ -312,7 +320,16 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
         constraintsWithPaddingBetween(holderView: self.navigationMapView, topView: _navigationViewController!.view, padding: 0.0)
         flutterViewController.didMove(toParent: flutterViewController)
         result(true)
-
+        
+        let parentSafeArea = _navigationViewController!.view.safeAreaLayoutGuide
+        let bannerHeight: CGFloat = 80.0
+        let verticalOffset: CGFloat = 20.0
+        let horizontalOffset: CGFloat = 10.0
+        
+        bottomBanner.view.heightAnchor.constraint(equalToConstant: bannerHeight).isActive = true
+        bottomBanner.view.bottomAnchor.constraint(equalTo: parentSafeArea.bottomAnchor, constant: -verticalOffset).isActive = true
+        bottomBanner.view.leadingAnchor.constraint(equalTo: parentSafeArea.leadingAnchor, constant: horizontalOffset).isActive = true
+        bottomBanner.view.trailingAnchor.constraint(equalTo: parentSafeArea.trailingAnchor, constant: -horizontalOffset).isActive = true
     }
 
     func constraintsWithPaddingBetween(holderView: UIView, topView: UIView, padding: CGFloat) {
@@ -369,6 +386,7 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
 
 }
 
+@available(iOS 13.0, *)
 extension FlutterMapboxNavigationView : NavigationServiceDelegate {
 
     public func navigationService(_ service: NavigationService, didUpdate progress: RouteProgress, with location: CLLocation, rawLocation: CLLocation) {
@@ -395,6 +413,7 @@ extension FlutterMapboxNavigationView : NavigationServiceDelegate {
     }
 }
 
+@available(iOS 13.0, *)
 extension FlutterMapboxNavigationView : NavigationMapViewDelegate {
 
 //    public func mapView(_ mapView: NavigationMapView, didFinishLoading style: Style) {
@@ -417,6 +436,7 @@ extension FlutterMapboxNavigationView : NavigationMapViewDelegate {
 
 }
 
+@available(iOS 13.0, *)
 extension FlutterMapboxNavigationView : UIGestureRecognizerDelegate {
             
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

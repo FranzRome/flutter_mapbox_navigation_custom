@@ -71,6 +71,17 @@ extension RoadObject {
         /// Japan-specific Junction info, refers to a place where multiple expressways meet, e.g. Ariake JCT.
         case jct(Junction?)
         
+        /// :nodoc:
+        /// Not supported yet
+        case notification
+
+        /// :nodoc:
+        /// Not supported yet
+        case mergingArea
+
+        /// Unknown
+        case unknown
+        
         init(_ native: MapboxNavigationNative.RoadObjectType) {
             switch native {
             case .incident:
@@ -95,8 +106,13 @@ extension RoadObject {
                 self = .jct(nil)
             case .custom:
                 self = .userDefined
+            case .notification:
+                self = .notification
+            case .mergingArea:
+                self = .mergingArea
             @unknown default:
-                fatalError("Unknown MapboxNavigationNative.RoadObjectType value.")
+                Log.error("Unknown MapboxNavigationNative.RoadObjectType value: \(native).", category: .navigation)
+                self = .unknown
             }
         }
         
@@ -124,8 +140,13 @@ extension RoadObject {
                 self = .jct(metadata.isJctInfo() ? Junction(metadata.getJctInfo()) : nil)
             case .custom:
                 self = .userDefined
+            case .notification:
+                self = .notification
+            case .mergingArea:
+                self = .mergingArea
             @unknown default:
-                fatalError("Unknown MapboxNavigationNative.RoadObjectType value.")
+                Log.error("Unknown MapboxNavigationNative.RoadObjectType value: \(type).", category: .navigation)
+                self = .unknown
             }
         }
     }

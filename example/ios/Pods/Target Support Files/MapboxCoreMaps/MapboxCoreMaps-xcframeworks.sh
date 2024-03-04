@@ -20,11 +20,11 @@ variant_for_slice()
   "MapboxCoreMaps.xcframework/ios-arm64")
     echo ""
     ;;
+  "MapboxCoreMaps.xcframework/ios-arm64_x86_64-maccatalyst")
+    echo "maccatalyst"
+    ;;
   "MapboxCoreMaps.xcframework/ios-arm64_x86_64-simulator")
     echo "simulator"
-    ;;
-  "MapboxCoreMaps.xcframework/ios-x86_64-maccatalyst")
-    echo "maccatalyst"
     ;;
   esac
 }
@@ -35,11 +35,11 @@ archs_for_slice()
   "MapboxCoreMaps.xcframework/ios-arm64")
     echo "arm64"
     ;;
-  "MapboxCoreMaps.xcframework/ios-arm64_x86_64-simulator")
+  "MapboxCoreMaps.xcframework/ios-arm64_x86_64-maccatalyst")
     echo "arm64 x86_64"
     ;;
-  "MapboxCoreMaps.xcframework/ios-x86_64-maccatalyst")
-    echo "x86_64"
+  "MapboxCoreMaps.xcframework/ios-arm64_x86_64-simulator")
+    echo "arm64 x86_64"
     ;;
   esac
 }
@@ -123,5 +123,5 @@ install_xcframework() {
   echo "Copied $source to $destination"
 }
 
-install_xcframework "${PODS_ROOT}/MapboxCoreMaps/MapboxCoreMaps.xcframework" "MapboxCoreMaps" "framework" "ios-arm64" "ios-arm64_x86_64-simulator" "ios-x86_64-maccatalyst"
+install_xcframework "${PODS_ROOT}/MapboxCoreMaps/MapboxCoreMaps.xcframework" "MapboxCoreMaps" "framework" "ios-arm64" "ios-arm64_x86_64-maccatalyst" "ios-arm64_x86_64-simulator"
 

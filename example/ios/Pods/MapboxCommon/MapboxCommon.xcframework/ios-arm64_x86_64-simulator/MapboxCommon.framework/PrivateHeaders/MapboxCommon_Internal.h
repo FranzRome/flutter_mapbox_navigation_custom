@@ -7,11 +7,13 @@
 #import <MapboxCommon/MapboxDeferredDeliveryOptions_Internal.h>
 #import <MapboxCommon/MapboxEventsBuilder_Internal.h>
 #import <MapboxCommon/MapboxEventsService_Internal.h>
+#import <MapboxCommon/MapboxFeatureTelemetry_Internal.h>
 #import <MapboxCommon/MapboxHttp_Internal.h>
 #import <MapboxCommon/MapboxMeter_Internal.h>
 #import <MapboxCommon/MapboxLogging_Internal.h>
 #import <MapboxCommon/MapboxOfflineSwitch_Internal.h>
 #import <MapboxCommon/MapboxReachability_Internal.h>
+#import <MapboxCommon/MapboxSdkInfoRegistry_Internal.h>
 #import <MapboxCommon/MapboxSettingsService_Internal.h>
 #import <MapboxCommon/MapboxSystemInformation_Internal.h>
 #import <MapboxCommon/MapboxTelemetry_Internal.h>
@@ -23,3 +25,5 @@
 #import <MapboxCommon/MapboxVersion_Internal.h>
 #import <MapboxCommon/MapboxLocation_Internal.h>
 #import <MapboxCommon/MapboxLifecycle_Internal.h>
+#import <MapboxCommon/MapboxBattery_Internal.h>
+#import <MapboxCommon/MapboxMovement_Internal.h>

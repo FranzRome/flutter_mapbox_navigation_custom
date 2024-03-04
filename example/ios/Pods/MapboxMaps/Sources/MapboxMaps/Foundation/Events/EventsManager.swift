@@ -38,9 +38,10 @@ internal final class EventsManager: EventsManagerProtocol {
     private let metricsEnabledObservation: NSKeyValueObservation
 
     internal init(accessToken: String) {
-        let eventsServerOptions = EventsServerOptions(token: accessToken,
-                                                      userAgentFragment: Constants.MGLAPIClientUserAgentBase,
-                                                      deferredDeliveryServiceOptions: nil)
+        let eventsServerOptions = EventsServerOptions(
+            token: accessToken,
+            userAgentFragment: Constants.UserAgent,
+            deferredDeliveryServiceOptions: nil)
         eventsService = EventsService.getOrCreate(for: eventsServerOptions)
         telemetryService = TelemetryService.getOrCreate(for: eventsServerOptions)
 
@@ -49,11 +50,9 @@ internal final class EventsManager: EventsManagerProtocol {
         ])
 
         metricsEnabledObservation = UserDefaults.standard.observe(\.MGLMapboxMetricsEnabled, options: [.initial, .new]) { _, change in
-            DispatchQueue.main.async {
-                guard let metricsEnabled = change.newValue else { return }
+            guard let metricsEnabled = change.newValue else { return }
 
-                TelemetryUtils.setEventsCollectionStateForEnableCollection(metricsEnabled)
-            }
+            TelemetryUtils.setEventsCollectionStateForEnableCollection(metricsEnabled)
         }
     }
 

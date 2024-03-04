@@ -5,4 +5,5 @@
 #import "MBMCameraState.h"
 #import "MBMCameraBoundsOptions.h"
 #import "MBMCameraBounds.h"
+#import "MBMCoordinateInfo.h"
 #import "MBMCameraManager.h"
