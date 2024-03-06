@@ -46,7 +46,7 @@ class CustomBarsViewController: UIViewController {
                                                           bottomBanner: bottomBanner)
                 let navigationViewController = NavigationViewController(for: indexedRouteResponse,
                                                                         navigationOptions: navigationOptions)
-                bottomBanner.navigationViewController = navigationViewController
+                //bottomBanner.navigationViewController = navigationViewController
                 
                 let parentSafeArea = navigationViewController.view.safeAreaLayoutGuide
                 let bannerHeight: CGFloat = 80.0
@@ -68,6 +68,12 @@ class CustomBarsViewController: UIViewController {
                 navigationViewController.showsSpeedLimits = false
             }
         }
+    }
+    
+    
+    // Test code
+    public func onCancel() {
+        self.dismiss(animated: false)
     }
 }
 
@@ -95,6 +101,10 @@ class CustomTopBarViewController: ContainerViewController {
         banner.separatorView.isHidden = true
         return banner
     }()
+    
+    public func onCancel() {
+        print("CustomTopBarViewController")
+    }
     
     override func viewDidLoad() {
         view.addSubview(instructionsBannerView)
@@ -154,11 +164,12 @@ class CustomTopBarViewController: ContainerViewController {
 
 @available(iOS 13.0, *)
 class CustomBottomBarViewController: ContainerViewController, CustomBottomBannerViewDelegate {
-    weak var navigationViewController: NavigationViewController?
+    weak var navigationViewController: FlutterMapboxNavigationView?
+    
     
     // Or you can implement your own UI elements
     lazy var bannerView: HostingView<CustomBottomBannerView> = ({
-        var banner = CustomBottomBannerView(remainingTime: 10, distance: 10, estimatedArrivalTime: NSDate.now)
+        var banner = CustomBottomBannerView(remainingTime: 10, distance: 10, estimatedArrivalTime: NSDate.now, cal: Calendar.current, controller: self)
         //print("aaaa")
         //banner.translatesAutoresizingMaskIntoConstraints = false
         
@@ -166,19 +177,33 @@ class CustomBottomBarViewController: ContainerViewController, CustomBottomBanner
         return HostingView(rootView: banner)
     }())
     
+    init(navigationViewController: FlutterMapboxNavigationView? = nil) {
+        self.navigationViewController = navigationViewController
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func onCancel() {
+        print("CustomBottomBarViewController")
+        
+        self.navigationViewController?.onCancel()
+    }
     
     override func loadView() {
         super.loadView()
         
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bannerView)
-        
-        let safeArea = view.layoutMarginsGuide
+
+        //let safeArea = view.layoutMarginsGuide
         NSLayoutConstraint.activate([
-            bannerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            bannerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            bannerView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            bannerView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+            bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bannerView.heightAnchor.constraint(equalToConstant: 15),
+            bannerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -206,8 +231,8 @@ class CustomBottomBarViewController: ContainerViewController, CustomBottomBanner
     
     // MARK: - CustomBottomBannerViewDelegate implementation
     
-    func customBottomBannerDidCancel(_ banner: CustomBottomBannerView) {
+    /*func customBottomBannerDidCancel(_ banner: CustomBottomBannerView) {
         navigationViewController?.dismiss(animated: true,
                                           completion: nil)
-    }
+    }*/
 }

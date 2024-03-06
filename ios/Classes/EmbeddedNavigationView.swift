@@ -14,6 +14,7 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
     let messenger: FlutterBinaryMessenger
     let channel: FlutterMethodChannel
     let eventChannel: FlutterEventChannel
+    var result: FlutterResult?=nil
 
     var navigationMapView: NavigationMapView!
     var arguments: NSDictionary?
@@ -48,6 +49,7 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
             guard let strongSelf = self else { return }
 
             let arguments = call.arguments as? NSDictionary
+            strongSelf.result = result
 
             if(call.method == "getPlatformVersion")
             {
@@ -85,6 +87,9 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
                 //used to recenter map from user action during navigation
                 strongSelf.navigationMapView.navigationCamera.follow()
             }
+            else if(call.method == "helloWorld"){
+                strongSelf.helloWorld()
+            }
             else
             {
                 result("method is not implemented");
@@ -93,6 +98,11 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
         }
     }
 
+    // Test method
+    private func helloWorld(){
+        print("Hello World")
+    }
+    
     public func view() -> UIView
     {
         if(_mapInitialized)
@@ -255,6 +265,17 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
         }
     }
 
+    //Test Code
+    public func onCancel() {
+        print("FlutterMapboxNavigationView")
+        //endNavigation(result: result)
+        clearRoute(arguments: nil, result: result!)
+    }
+    
+    public func completeDelivery() {
+        sendEvent(eventType: MapBoxEventType.delivery_completed)
+    }
+    
     func startEmbeddedFreeDrive(arguments: NSDictionary?, result: @escaping FlutterResult) {
 
         let locationProvider: LocationProvider = passiveLocationProvider
@@ -292,7 +313,7 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
             nightStyle.mapStyleURL = URL(string: _mapStyleUrlNight!)!
         }
         
-        let bottomBanner = CustomBottomBarViewController()
+        let bottomBanner = CustomBottomBarViewController(navigationViewController: self)
         let navigationOptions = NavigationOptions(
             styles: [dayStyle, nightStyle],
             navigationService: navigationService,

@@ -12,10 +12,10 @@ import MapboxDirections
 
 @available(iOS 13.0, *)
 protocol CustomBottomBannerViewDelegate: AnyObject {
-    func customBottomBannerDidCancel(_ banner: CustomBottomBannerView)
+    //func customBottomBannerDidCancel(_ banner: CustomBottomBannerView)
 }
 
-@available(iOS 13.0, *)
+@available(iOS 15.0, *)
 struct CustomBottomBannerView: View {
     
     /*var navigationService: MapboxNavigationService
@@ -24,30 +24,53 @@ struct CustomBottomBannerView: View {
         self.navigationService = navigationService
     }*/
     
+    public init(delegate: CustomBottomBannerViewDelegate? = nil, remainingTime: Float, distance: Float, estimatedArrivalTime: Date, cal: Calendar, controller: CustomBottomBarViewController) {
+        self.delegate = delegate
+        self.remainingTime = remainingTime
+        self.distance = distance
+        self.estimatedArrivalTime = estimatedArrivalTime
+        self.cal = cal
+        self.controller = controller
+    }
+    
     weak var delegate: CustomBottomBannerViewDelegate?
     public var remainingTime: Float
     public var distance: Float
     public var estimatedArrivalTime: Date
     public var cal: Calendar = Calendar.current
+    private var controller: CustomBottomBarViewController
     
     //@State var remainingTime: Float = 0.5
     var body: some View {
-        VStack {
+        VStack{
+            Spacer().frame(height:25).background(.white)
             Text("\(Int(remainingTime/60)) min").frame(maxWidth: .infinity)
             HStack {
+                Button(action: {
+                    self.onCompleteDelivery()
+                }) {
+                    Image("box")
+                        .resizable() // This allows the image to be resized
+                        .frame(width: 30, height: 30)
+                }
                 distance > 1000
                 ? Text("\(Int(distance/1000))km").frame(maxWidth: .infinity)
                 : Text("\(Int(distance))m").frame(maxWidth: .infinity)
-                Spacer()
                 Text("\(cal.component(.hour, from:estimatedArrivalTime)):\(cal.component(.minute, from:estimatedArrivalTime))").frame(maxWidth: .infinity)
-                Text("")
-            }
-            .padding(.horizontal, 8)
-        }.frame(width: UIScreen.main.bounds.width, height: 160)
-            .alignmentGuide(HorizontalAlignment.center, computeValue: { _ in
+                Button(action: {
+                    self.onCancel()
+                }, label: {
+                    Image(systemName: "x.circle").frame(width: 30, height: 30).foregroundColor(Color(red: 0, green: 0.412, blue: 0.196))
+                })
+                
+            }.padding(.horizontal, 60)
+            Spacer().frame(height:50).background(.white)
+        }//.ignoresSafeArea(edges: [.bottom])
+        .frame(width: UIScreen.main.bounds.width)
+        /* .alignmentGuide(HorizontalAlignment.center, computeValue: { _ in
                 UIScreen.main.bounds.width/2
-            })
-            .background(Color.white)
+            })*/
+            .background(Color.white,ignoresSafeAreaEdges: Edge.Set.bottom)
     }
     
     func navigationService(_ service: NavigationService, didUpdate progress: RouteProgress, with location: CLLocation, rawLocation: CLLocation) {
@@ -58,7 +81,12 @@ struct CustomBottomBannerView: View {
     }
     
     func onCancel() {
-        // Implementa l'azione del pulsante "Cancel"
+        //print("Button Pressed")
+        self.controller.onCancel()
+    }
+    
+    func onCompleteDelivery() {
+        self.controller.navigationViewController?.completeDelivery()
     }
 }
 

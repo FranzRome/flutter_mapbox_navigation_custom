@@ -80,6 +80,10 @@ class MethodChannelFlutterMapboxNavigation
     return false;
   }
 
+  Future<void> helloWorld() async {
+    await methodChannel.invokeMethod('helloWorld');
+  }
+
   @override
   Future<dynamic> addWayPoints({required List<WayPoint> wayPoints}) async {
     assert(wayPoints.isNotEmpty, 'Error: WayPoints must be at least 1');
