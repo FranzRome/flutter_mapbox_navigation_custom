@@ -23,10 +23,13 @@
     ],
     "MapboxNavigation": [
       "~> 2.11"
+    ],
+    "SVGView": [
+      "~> 1.0"
     ]
   },
   "platforms": {
-    "ios": "12.0"
+    "ios": "15.0"
   },
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES",

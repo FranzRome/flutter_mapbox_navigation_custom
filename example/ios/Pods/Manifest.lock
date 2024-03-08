@@ -4,6 +4,7 @@ PODS:
     - Flutter
     - MapboxCoreNavigation (~> 2.11)
     - MapboxNavigation (~> 2.11)
+    - SVGView (~> 1.0)
   - MapboxCommon (23.8.6)
   - MapboxCoreMaps (10.16.4):
     - MapboxCommon (~> 23.8)
@@ -31,6 +32,7 @@ PODS:
   - MapboxSpeech (2.1.1)
   - Polyline (5.1.0)
   - Solar-dev (3.0.1)
+  - SVGView (1.0.6)
   - Turf (2.6.1)
 
 DEPENDENCIES:
@@ -50,6 +52,7 @@ SPEC REPOS:
     - MapboxSpeech
     - Polyline
     - Solar-dev
+    - SVGView
     - Turf
 
 EXTERNAL SOURCES:
@@ -60,7 +63,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_mapbox_navigation: 1d7e1c22554f4e6543209f7f0063393c9a6d53bf
+  flutter_mapbox_navigation: 7f8b53831027d8e46d5e038cb66ced678cea3adb
   MapboxCommon: 90f76693dc02438acbb5ea9a5b266a4c0eb1c875
   MapboxCoreMaps: 7b07d1ca8c454a4381daf09df901b9d6bf90bce0
   MapboxCoreNavigation: fb7967e584e1fb81060fe0b1380fb36781e71f5e
@@ -72,8 +75,9 @@ SPEC CHECKSUMS:
   MapboxSpeech: cd25ef99c3a3d2e0da72620ff558276ea5991a77
   Polyline: 2a1f29f87f8d9b7de868940f4f76deb8c678a5b1
   Solar-dev: 4612dc9878b9fed2667d23b327f1d4e54e16e8d0
+  SVGView: 4a9fa6296a5fdb6232dec7450aa98f169d0e274f
   Turf: 469ce2c3d22e5e8e4818d5a3b254699a5c89efa4
 
-PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
+PODFILE CHECKSUM: 57c8aed26fba39d3ec9424816221f294a07c58eb
 
 COCOAPODS: 1.15.2

@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import Darwin
+import Foundation
+import UIKit
 import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
+import SVGView
 
 @available(iOS 13.0, *)
 protocol CustomBottomBannerViewDelegate: AnyObject {
@@ -19,10 +23,10 @@ protocol CustomBottomBannerViewDelegate: AnyObject {
 struct CustomBottomBannerView: View {
     
     /*var navigationService: MapboxNavigationService
-    
-    init(navigationService: MapboxNavigationService){
-        self.navigationService = navigationService
-    }*/
+     
+     init(navigationService: MapboxNavigationService){
+     self.navigationService = navigationService
+     }*/
     
     public init(delegate: CustomBottomBannerViewDelegate? = nil, remainingTime: Float, distance: Float, estimatedArrivalTime: Date, cal: Calendar, controller: CustomBottomBarViewController) {
         self.delegate = delegate
@@ -42,35 +46,89 @@ struct CustomBottomBannerView: View {
     
     //@State var remainingTime: Float = 0.5
     var body: some View {
-        VStack{
-            Spacer().frame(height:25).background(.white)
-            Text("\(Int(remainingTime/60)) min").frame(maxWidth: .infinity)
-            HStack {
-                Button(action: {
-                    self.onCompleteDelivery()
-                }) {
-                    Image("box")
-                        .resizable() // This allows the image to be resized
-                        .frame(width: 30, height: 30)
+        HStack {
+            Spacer().frame(width:12).background(.white)
+            Button(action: {
+                self.onCompleteDelivery()
+            }) {
+                Image("box")
+                    .resizable() // This allows the image to be resized
+                    .frame(width: 30, height: 30)
+                    .padding(EdgeInsets(top: 9, leading: 24, bottom: 9, trailing: 24))
+                    .background(
+                        RoundedRectangle(
+                            cornerRadius: 10,
+                            style: .continuous
+                        )
+                        .fill(Color(red: 0, green: 0.412, blue: 0.196))
+                    )
+            }
+            .buttonBorderShape(.roundedRectangle(radius: 10))
+            .padding(EdgeInsets(top: 9, leading: 24, bottom: 9, trailing: 24))
+            .frame(width: 79, height: 48)
+            VStack {
+                Spacer().frame(height:16).background(.white)
+                Text("\(Int(remainingTime/60)) min")
+                    .frame(maxWidth: .infinity)
+                    .font(Font.title2.weight(.semibold))
+                HStack {
+                    Image("marker").resizable().scaledToFit().frame(width: 15, height: 15)
+                    if distance >= 1000 {
+                        Text("\(round<Int>(distance/1000*10)/10)")
+                            .font(Font.headline.weight(.semibold))
+                           Text("km")
+                            .font(Font.headline.weight(.light))
+                    } else {
+                        Text("\(Int(round(distance)))")
+                            .font(Font.headline.weight(.semibold))
+                           Text("m")
+                            .font(Font.headline.weight(.light))
+                        
+                    }
+                    Spacer().frame(width: 24)
+                    Image("clock").resizable().scaledToFit().frame(width: 15, height: 15)
+                    if cal.component(.hour, from: estimatedArrivalTime) >= 10 && cal.component(.minute, from: estimatedArrivalTime) >= 10 {
+                        Text("\(cal.component(.hour, from:estimatedArrivalTime)):\(cal.component(.minute, from:estimatedArrivalTime))")
+                            .font(Font.headline.weight(.semibold))
+                    } else if cal.component(.hour, from: estimatedArrivalTime) >= 10 && cal.component(.minute, from: estimatedArrivalTime) < 10 {
+                        Text("\(cal.component(.hour, from:estimatedArrivalTime)):0\(cal.component(.minute, from:estimatedArrivalTime))")
+                            .font(Font.headline.weight(.semibold))
+                    } else if cal.component(.hour, from: estimatedArrivalTime) < 10 && cal.component(.minute, from: estimatedArrivalTime) >= 10 {
+                        Text("0\(cal.component(.hour, from:estimatedArrivalTime)):\(cal.component(.minute, from:estimatedArrivalTime))")
+                            .font(Font.headline.weight(.semibold))
+                    } else {
+                        Text("0\(cal.component(.hour, from:estimatedArrivalTime)):0\(cal.component(.minute, from:estimatedArrivalTime))")
+                            .font(Font.headline.weight(.semibold))
+                    }
                 }
-                distance > 1000
-                ? Text("\(Int(distance/1000))km").frame(maxWidth: .infinity)
-                : Text("\(Int(distance))m").frame(maxWidth: .infinity)
-                Text("\(cal.component(.hour, from:estimatedArrivalTime)):\(cal.component(.minute, from:estimatedArrivalTime))").frame(maxWidth: .infinity)
-                Button(action: {
-                    self.onCancel()
-                }, label: {
-                    Image(systemName: "x.circle").frame(width: 30, height: 30).foregroundColor(Color(red: 0, green: 0.412, blue: 0.196))
-                })
-                
-            }.padding(.horizontal, 60)
-            Spacer().frame(height:50).background(.white)
-        }//.ignoresSafeArea(edges: [.bottom])
+                Spacer().frame(height:47).background(.white)
+            }
+            //.padding(.horizontal, 30)
+            
+            Button(action: {
+                self.onCancel()
+            }) {
+                Image(systemName: "xmark")
+                    .resizable() // This allows the image to be resized
+                    .frame(width: 20, height: 20)
+                    .padding(EdgeInsets(top: 12, leading: 24, bottom: 12, trailing: 24))
+                    .background(
+                        RoundedRectangle(
+                            cornerRadius: 10,
+                            style: .continuous
+                        )
+                        .stroke(.gray, lineWidth: 2)
+                    )
+                    .foregroundColor(.black)
+            }
+            .buttonBorderShape(.roundedRectangle(radius: 10))
+            .padding(EdgeInsets(top: 9, leading: 24, bottom: 9, trailing: 24))
+            .frame(width: 79, height: 48)
+            Spacer().frame(width:12).background(.white)
+        }
         .frame(width: UIScreen.main.bounds.width)
-        /* .alignmentGuide(HorizontalAlignment.center, computeValue: { _ in
-                UIScreen.main.bounds.width/2
-            })*/
-            .background(Color.white,ignoresSafeAreaEdges: Edge.Set.bottom)
+        .background(Color.white,ignoresSafeAreaEdges: Edge.Set.bottom)
+        
     }
     
     func navigationService(_ service: NavigationService, didUpdate progress: RouteProgress, with location: CLLocation, rawLocation: CLLocation) {
@@ -101,7 +159,7 @@ struct ProgressBar: View {
         }
     }
 }
- 
+
 @available(iOS 13.0, *)
 class HostingView<T: View>: UIView {
     

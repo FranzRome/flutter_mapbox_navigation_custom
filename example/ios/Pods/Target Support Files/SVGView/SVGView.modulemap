@@ -1,0 +1,6 @@
+framework module SVGView {
+  umbrella header "SVGView-umbrella.h"
+
+  export *
+  module * { export * }
+}

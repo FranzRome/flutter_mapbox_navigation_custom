@@ -21,5 +21,5 @@ enum MapBoxEvent {
   failed_to_reroute,
   reroute_along,
   on_map_tap,
-  delivery_completed,
+  deliver_button_tap
 }
