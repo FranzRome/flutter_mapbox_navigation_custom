@@ -38,7 +38,7 @@ public class NavigationFactory : NSObject, FlutterStreamHandler
     var _alternatives = true
     var _shouldReRoute = true
     var _showReportFeedbackButton = true
-    var _showEndOfRouteFeedback = true
+    var _showEndOfRouteFeedback = false
     var _enableOnMapTapCallback = false
     var navigationDirections: Directions?
     
@@ -454,5 +454,9 @@ extension NavigationFactory : NavigationViewControllerDelegate {
             _eventSink = nil
             
         }
+    }
+    
+    public func bundle() -> Bundle{
+        return Bundle(for: type(of: self))
     }
 }

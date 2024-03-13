@@ -28,13 +28,21 @@ struct CustomBottomBannerView: View {
      self.navigationService = navigationService
      }*/
     
-    public init(delegate: CustomBottomBannerViewDelegate? = nil, remainingTime: Float, distance: Float, estimatedArrivalTime: Date, cal: Calendar, controller: CustomBottomBarViewController) {
+    let nf = NumberFormatter()
+    let bundle: Bundle
+    
+    public init(delegate: CustomBottomBannerViewDelegate? = nil, remainingTime: Float, distance: Float, estimatedArrivalTime: Date, cal: Calendar, controller: CustomBottomBarViewController, bundle: Bundle) {
         self.delegate = delegate
         self.remainingTime = remainingTime
         self.distance = distance
         self.estimatedArrivalTime = estimatedArrivalTime
         self.cal = cal
         self.controller = controller
+        self.nf.numberStyle = .decimal
+        self.nf.minimumFractionDigits = 1
+        self.nf.maximumFractionDigits = 1
+        print("Bundle:"+(Bundle.main.url(forResource: "location", withExtension: "svg")?.absoluteString ?? "nil"))
+        self.bundle = bundle
     }
     
     weak var delegate: CustomBottomBannerViewDelegate?
@@ -44,123 +52,124 @@ struct CustomBottomBannerView: View {
     public var cal: Calendar = Calendar.current
     private var controller: CustomBottomBarViewController
     
-    //@State var remainingTime: Float = 0.5
     var body: some View {
-        HStack {
-            Spacer().frame(width:12).background(.white)
-            Button(action: {
-                self.onCompleteDelivery()
-            }) {
-                Image("box")
-                    .resizable() // This allows the image to be resized
-                    .frame(width: 30, height: 30)
-                    .padding(EdgeInsets(top: 9, leading: 24, bottom: 9, trailing: 24))
-                    .background(
-                        RoundedRectangle(
-                            cornerRadius: 10,
-                            style: .continuous
-                        )
-                        .fill(Color(red: 0, green: 0.412, blue: 0.196))
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, content: {
+            HStack(
+                content: {
+                    Button(action: {
+                        self.onCompleteDelivery()
+                    }) {
+                        let url = bundle.url(forResource: "delivery_button", withExtension: "svg")
+                        if(url != nil) {
+                            SVGView(contentsOf: url!)
+                        }
+                    }
+                    .buttonBorderShape(.roundedRectangle(radius: 10))
+                    .frame(width: 79, height: 48)
+                    VStack(
+                        content: {
+                            HStack(content: {
+                                Text("\(Int(remainingTime/60))")
+                                    .frame(height: 32)
+                                    .font(.system(size: 32, weight: .semibold))
+                                    .foregroundColor(Color(red: 0, green: 0.65, blue: 0.31))
+                                Text("min")
+                                    .font(.system(size: 24, weight: .semibold))
+                                    .foregroundColor(Color(red: 0, green: 0.65, blue: 0.31))
+                            })
+                            HStack(spacing: 2, content: {
+                                let url1 = bundle.url(forResource: "location_icon", withExtension: "svg")
+                                if(url1 != nil) {
+                                    SVGView(contentsOf: url1!)
+                                        .frame(width: 17, height: 17)
+                                }
+                                Text(distanceValueString(distance: distance))
+                                    .font(.system(size: 16, weight: .semibold))
+                                Text(distanceMeasureString(distance: distance))
+                                    .font(.system(size: 12, weight: .light))
+                                    .padding(.trailing, 10)
+                                
+                                let url2 = bundle.url(forResource: "clock_icon", withExtension: "svg")
+                                if(url2 != nil) {
+                                    SVGView(contentsOf: url2!)
+                                        .frame(width: 17, height: 17)
+                                }
+                                Text(estimatedArrivalTimeString())
+                                    .font(Font.headline.weight(.semibold))
+                            })
+                        }
                     )
-            }
-            .buttonBorderShape(.roundedRectangle(radius: 10))
-            .padding(EdgeInsets(top: 9, leading: 24, bottom: 9, trailing: 24))
-            .frame(width: 79, height: 48)
-            VStack {
-                Spacer().frame(height:16).background(.white)
-                Text("\(Int(remainingTime/60)) min")
-                    .frame(maxWidth: .infinity)
-                    .font(Font.title2.weight(.semibold))
-                HStack {
-                    Image("marker").resizable().scaledToFit().frame(width: 15, height: 15)
-                    if distance >= 1000 {
-                        Text("\(round<Int>(distance/1000*10)/10)")
-                            .font(Font.headline.weight(.semibold))
-                           Text("km")
-                            .font(Font.headline.weight(.light))
-                    } else {
-                        Text("\(Int(round(distance)))")
-                            .font(Font.headline.weight(.semibold))
-                           Text("m")
-                            .font(Font.headline.weight(.light))
-                        
+                    Button(action: {
+                        self.onCancel()
+                    }) {
+                        let url = bundle.url(forResource: "close_button", withExtension: "svg")
+                        if(url != nil) {
+                            SVGView(contentsOf: url!)
+                        }
                     }
-                    Spacer().frame(width: 24)
-                    Image("clock").resizable().scaledToFit().frame(width: 15, height: 15)
-                    if cal.component(.hour, from: estimatedArrivalTime) >= 10 && cal.component(.minute, from: estimatedArrivalTime) >= 10 {
-                        Text("\(cal.component(.hour, from:estimatedArrivalTime)):\(cal.component(.minute, from:estimatedArrivalTime))")
-                            .font(Font.headline.weight(.semibold))
-                    } else if cal.component(.hour, from: estimatedArrivalTime) >= 10 && cal.component(.minute, from: estimatedArrivalTime) < 10 {
-                        Text("\(cal.component(.hour, from:estimatedArrivalTime)):0\(cal.component(.minute, from:estimatedArrivalTime))")
-                            .font(Font.headline.weight(.semibold))
-                    } else if cal.component(.hour, from: estimatedArrivalTime) < 10 && cal.component(.minute, from: estimatedArrivalTime) >= 10 {
-                        Text("0\(cal.component(.hour, from:estimatedArrivalTime)):\(cal.component(.minute, from:estimatedArrivalTime))")
-                            .font(Font.headline.weight(.semibold))
-                    } else {
-                        Text("0\(cal.component(.hour, from:estimatedArrivalTime)):0\(cal.component(.minute, from:estimatedArrivalTime))")
-                            .font(Font.headline.weight(.semibold))
-                    }
+                    .buttonBorderShape(.roundedRectangle(radius: 10))
+                    .frame(width: 79, height: 48)
                 }
-                Spacer().frame(height:47).background(.white)
-            }
-            //.padding(.horizontal, 30)
+            ).padding(.horizontal, 20)
             
-            Button(action: {
-                self.onCancel()
-            }) {
-                Image(systemName: "xmark")
-                    .resizable() // This allows the image to be resized
-                    .frame(width: 20, height: 20)
-                    .padding(EdgeInsets(top: 12, leading: 24, bottom: 12, trailing: 24))
-                    .background(
-                        RoundedRectangle(
-                            cornerRadius: 10,
-                            style: .continuous
-                        )
-                        .stroke(.gray, lineWidth: 2)
-                    )
-                    .foregroundColor(.black)
-            }
-            .buttonBorderShape(.roundedRectangle(radius: 10))
-            .padding(EdgeInsets(top: 9, leading: 24, bottom: 9, trailing: 24))
-            .frame(width: 79, height: 48)
-            Spacer().frame(width:12).background(.white)
-        }
-        .frame(width: UIScreen.main.bounds.width)
-        .background(Color.white,ignoresSafeAreaEdges: Edge.Set.bottom)
-        
+        })
+        .frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity, alignment: .center)
+        .frame(width: UIScreen.main.bounds.size.width)
+        .background(.white)
     }
     
     func navigationService(_ service: NavigationService, didUpdate progress: RouteProgress, with location: CLLocation, rawLocation: CLLocation) {
-        // Update your controls manually
         print(progress.fractionTraveled)
-        //bannerView.rootView.progress = Float(progress.fractionTraveled)
-        //bannerView.eta = "~\(Int(round(progress.durationRemaining / 60))) min"
     }
     
     func onCancel() {
-        //print("Button Pressed")
         self.controller.onCancel()
     }
     
     func onCompleteDelivery() {
         self.controller.navigationViewController?.completeDelivery()
     }
-}
-
-@available(iOS 13.0, *)
-struct ProgressBar: View {
-    @Binding var progress: Float
-    var body: some View {
-        if #available(iOS 14.0, *) {
-            ProgressView(value: progress, total: 1)
+    
+    func distanceValueString(distance: Float) -> String {
+        var result: String
+        
+        if distance >= 1000 {
+            self.nf.minimumFractionDigits = 1
+            self.nf.maximumFractionDigits = 1
+            result = nf.string(from: NSNumber(value: distance/1000))!
+            //.font(Font.headline.weight(.semibold))
+            //Text("km")
+            //.font(Font.headline.weight(.light))
         } else {
-            // Fallback on earlier versions
+            self.nf.minimumFractionDigits = 0
+            self.nf.maximumFractionDigits = 0
+            result = nf.string(from: NSNumber(value: distance))!
         }
+        
+        return result
+    }
+    
+    func distanceMeasureString(distance: Float) -> String {
+        return distance >= 1000 ? "km" : "m"
+    }
+    
+    func estimatedArrivalTimeString() -> String {
+        var result: String = ""
+        
+        if cal.component(.hour, from: estimatedArrivalTime) >= 10 && cal.component(.minute, from: estimatedArrivalTime) >= 10 {
+            result = "\(cal.component(.hour, from:estimatedArrivalTime)):\(cal.component(.minute, from:estimatedArrivalTime))"
+        } else if cal.component(.hour, from: estimatedArrivalTime) >= 10 && cal.component(.minute, from: estimatedArrivalTime) < 10 {
+            result = "\(cal.component(.hour, from:estimatedArrivalTime)):0\(cal.component(.minute, from:estimatedArrivalTime))"
+        } else if cal.component(.hour, from: estimatedArrivalTime) < 10 && cal.component(.minute, from: estimatedArrivalTime) >= 10 {
+            result = "0\(cal.component(.hour, from:estimatedArrivalTime)):\(cal.component(.minute, from:estimatedArrivalTime))"
+        } else {
+            result = "0\(cal.component(.hour, from:estimatedArrivalTime)):0\(cal.component(.minute, from:estimatedArrivalTime))"
+        }
+        
+        return result
     }
 }
 
-@available(iOS 13.0, *)
 class HostingView<T: View>: UIView {
     
     private(set) var hostingController: UIHostingController<T>

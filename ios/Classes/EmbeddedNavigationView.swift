@@ -265,11 +265,12 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
         }
     }
 
-    //Test Code
     public func onCancel() {
-        print("FlutterMapboxNavigationView")
-        //endNavigation(result: result)
+        //print("FlutterMapboxNavigationView")
         clearRoute(arguments: nil, result: result!)
+        sendEvent(eventType: MapBoxEventType.navigation_cancelled)
+        _navigationViewController?.dismiss(animated: false)
+        //endNavigation(result: result)
     }
     
     public func completeDelivery() {
@@ -314,6 +315,7 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
         }
         
         let bottomBanner = CustomBottomBarViewController(navigationViewController: self)
+        bottomBanner.bundle = bundle()
         let navigationOptions = NavigationOptions(
             styles: [dayStyle, nightStyle],
             navigationService: navigationService,
@@ -339,18 +341,12 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
         self.navigationMapView.addSubview(_navigationViewController!.view)
         _navigationViewController!.view.translatesAutoresizingMaskIntoConstraints = false
         constraintsWithPaddingBetween(holderView: self.navigationMapView, topView: _navigationViewController!.view, padding: 0.0)
+        
+        bottomBanner.view.heightAnchor.constraint(equalToConstant: 120.0).isActive = true
+        bottomBanner.view.bottomAnchor.constraint(equalTo: _navigationViewController!.view.bottomAnchor).isActive = true
+        
         flutterViewController.didMove(toParent: flutterViewController)
         result(true)
-        
-        let parentSafeArea = _navigationViewController!.view.safeAreaLayoutGuide
-        let bannerHeight: CGFloat = 80.0
-        let verticalOffset: CGFloat = 20.0
-        let horizontalOffset: CGFloat = 10.0
-        
-        bottomBanner.view.heightAnchor.constraint(equalToConstant: bannerHeight).isActive = true
-        bottomBanner.view.bottomAnchor.constraint(equalTo: parentSafeArea.bottomAnchor, constant: -verticalOffset).isActive = true
-        bottomBanner.view.leadingAnchor.constraint(equalTo: parentSafeArea.leadingAnchor, constant: horizontalOffset).isActive = true
-        bottomBanner.view.trailingAnchor.constraint(equalTo: parentSafeArea.trailingAnchor, constant: -horizontalOffset).isActive = true
     }
 
     func constraintsWithPaddingBetween(holderView: UIView, topView: UIView, padding: CGFloat) {
