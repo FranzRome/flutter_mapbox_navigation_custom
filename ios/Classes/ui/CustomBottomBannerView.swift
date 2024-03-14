@@ -41,7 +41,6 @@ struct CustomBottomBannerView: View {
         self.nf.numberStyle = .decimal
         self.nf.minimumFractionDigits = 1
         self.nf.maximumFractionDigits = 1
-        print("Bundle:"+(Bundle.main.url(forResource: "location", withExtension: "svg")?.absoluteString ?? "nil"))
         self.bundle = bundle
     }
     
