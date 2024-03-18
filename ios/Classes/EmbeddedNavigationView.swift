@@ -332,8 +332,8 @@ public class FlutterMapboxNavigationView : NavigationFactory, FlutterPlatformVie
         _navigationViewController = NavigationViewController(for: response, routeIndex: selectedRouteIndex, routeOptions: routeOptions!, navigationOptions: navigationOptions)
         _navigationViewController!.delegate = self
 
-        //_navigationViewController!.showsReportFeedback = _showReportFeedbackButton
-        //_navigationViewController!.showsEndOfRouteFeedback = _showEndOfRouteFeedback
+        _navigationViewController!.showsReportFeedback = _showReportFeedbackButton
+        _navigationViewController!.showsEndOfRouteFeedback = _showEndOfRouteFeedback
 
         let flutterViewController = UIApplication.shared.delegate?.window?!.rootViewController as! FlutterViewController
         flutterViewController.addChild(_navigationViewController!)

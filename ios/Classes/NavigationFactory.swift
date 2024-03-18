@@ -407,10 +407,6 @@ extension NavigationFactory : NavigationViewControllerDelegate {
             
             _eventSink!(progressEventJson)
             
-            if(progress.isFinalLeg && progress.currentLegProgress.userHasArrivedAtWaypoint && !_showEndOfRouteFeedback)
-            {
-                _eventSink = nil
-            }
         }
     }
     
