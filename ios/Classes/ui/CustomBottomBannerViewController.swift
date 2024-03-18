@@ -11,7 +11,6 @@ import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
 
-@available(iOS 13.0, *)
 class CustomBottomBarViewController: ContainerViewController, CustomBottomBannerViewDelegate {
     weak var navigationViewController: FlutterMapboxNavigationView?
     var bundle: Bundle?

@@ -14,12 +14,10 @@ import MapboxNavigation
 import MapboxDirections
 import SVGView
 
-@available(iOS 13.0, *)
 protocol CustomBottomBannerViewDelegate: AnyObject {
     //func customBottomBannerDidCancel(_ banner: CustomBottomBannerView)
 }
 
-@available(iOS 15.0, *)
 struct CustomBottomBannerView: View {
     
     /*var navigationService: MapboxNavigationService
